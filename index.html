@@ -137,6 +137,15 @@
       border: 1px dashed var(--border-diagram) !important;
       transition: all 0.2s ease-in-out;
     }
+    
+    /* Flowing dashed path animations for data pipelines */
+    @keyframes flow {
+      to { stroke-dashoffset: -20; }
+    }
+    .animate-flow {
+      stroke-dasharray: 6, 4;
+      animation: flow 1s linear infinite;
+    }
     .bg-white:hover, .bento-card:hover {
       border-color: var(--accent-bg) !important; 
       box-shadow: 0 0 15px var(--accent-shadow) !important;
@@ -319,21 +328,21 @@
                   <i data-lucide="layout" class="w-6 h-6 text-[#b84a39]" stroke-width="2"></i>
                 </div>
                 <div>
-                  <span class="text-sm font-bold tracking-wider text-neutral-800 dark:text-neutral-200">UI Stage (Popup)</span>
-                  <p class="text-[10px] text-neutral-500 font-mono mt-1">popup.html + popup.js</p>
+                  <span class="text-sm font-bold tracking-wider text-neutral-900 dark:text-white">UI Stage (Popup)</span>
+                  <p class="text-[10px] text-neutral-600 dark:text-neutral-400 font-mono mt-1">popup.html + popup.js</p>
                 </div>
               </div>
 
-              <!-- Connector arrow -->
-              <div class="flex-grow flex flex-col items-center mx-2 relative min-w-[120px]">
-                <span class="text-[9px] md:text-xs font-bold tracking-wider text-[#b84a39] uppercase text-center mb-2">Message Passing</span>
-                <div class="w-full flex items-center justify-center">
-                  <div class="h-1 flex-grow bg-gradient-to-r from-[#b84a39]/60 to-purple-500/60 rounded-full relative">
-                    <span class="absolute top-1/2 right-0 transform -translate-y-1/2 translate-x-1/2 w-3 h-3 bg-purple-500 rounded-full animate-ping"></span>
-                  </div>
-                  <i data-lucide="arrow-right" class="w-4 h-4 text-purple-500 -ml-1"></i>
+              <!-- Connector arrow with SVG flow animation -->
+              <div class="flex-grow flex flex-col items-center mx-2 relative min-w-[120px] w-full">
+                <span class="text-[9px] md:text-xs font-bold tracking-wider text-[#b84a39] dark:text-[#c084fc] uppercase text-center mb-2">Message Passing</span>
+                <div class="w-full flex items-center justify-center relative h-6">
+                  <svg class="w-full h-2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="0" y1="4" x2="100%" y2="4" stroke="var(--accent-bg)" stroke-width="2.5" class="animate-flow" />
+                  </svg>
+                  <i data-lucide="arrow-right" class="w-4 h-4 text-[#b84a39] dark:text-[#c084fc] absolute right-0"></i>
                 </div>
-                <span class="text-[9px] text-neutral-400 font-mono mt-2 text-center">chrome.runtime.sendMessage</span>
+                <span class="text-[9px] text-neutral-500 dark:text-neutral-400 font-mono mt-2 text-center">chrome.runtime.sendMessage</span>
               </div>
 
               <!-- Large Backend Box -->
@@ -342,8 +351,8 @@
                   <i data-lucide="cpu" class="w-6 h-6 text-purple-500" stroke-width="2"></i>
                 </div>
                 <div>
-                  <span class="text-sm font-bold tracking-wider text-neutral-800 dark:text-neutral-200">Engine Worker</span>
-                  <p class="text-[10px] text-neutral-500 font-mono mt-1">background.js (Service)</p>
+                  <span class="text-sm font-bold tracking-wider text-neutral-900 dark:text-white">Engine Worker</span>
+                  <p class="text-[10px] text-neutral-600 dark:text-neutral-400 font-mono mt-1">background.js (Service)</p>
                 </div>
               </div>
 
@@ -397,22 +406,23 @@
                   <span class="absolute -top-1.5 -right-1.5 px-2 py-0.5 bg-[#b84a39] rounded-full border-2 border-white dark:border-neutral-900 text-[8px] text-white font-bold animate-pulse">REQ</span>
                 </div>
                 <div>
-                  <span class="text-[11px] font-bold text-neutral-800 dark:text-neutral-200">Extension Engine</span>
-                  <p class="text-[8px] text-neutral-400 font-mono mt-0.5">Local Scope</p>
+                  <span class="text-[11px] font-bold text-neutral-900 dark:text-white">Extension Engine</span>
+                  <p class="text-[8px] text-neutral-600 dark:text-neutral-400 font-mono mt-0.5">Local Scope</p>
                 </div>
               </div>
 
-              <!-- Pipe 1 with huge Key -->
-              <div class="flex-grow flex flex-col items-center relative mx-1 min-w-[70px]">
-                <div class="w-full flex items-center justify-center">
-                  <div class="h-1 flex-grow bg-neutral-300 dark:bg-neutral-700 rounded-full"></div>
-                  <div class="px-3 py-1 bg-purple-100 dark:bg-purple-950/80 border-2 border-purple-300 dark:border-purple-800 rounded-full flex items-center gap-1.5 shadow-md -my-3 z-10 transition-all hover:scale-110">
+              <!-- Pipe 1 with Key and SVG flow animation -->
+              <div class="flex-grow flex flex-col items-center relative mx-1 min-w-[90px]">
+                <div class="w-full flex items-center justify-center relative h-6">
+                  <svg class="w-full h-2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="0" y1="4" x2="100%" y2="4" stroke="var(--accent-bg)" stroke-width="2.5" class="animate-flow" />
+                  </svg>
+                  <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2.5 py-1 bg-purple-100 dark:bg-purple-950/80 border-2 border-purple-300 dark:border-purple-800 rounded-full flex items-center gap-1.5 shadow-md z-10 transition-all hover:scale-110">
                     <i data-lucide="key" class="w-3.5 h-3.5 text-purple-600 dark:text-purple-400"></i>
                     <span class="text-[8px] font-bold font-mono text-purple-600 dark:text-purple-400 uppercase tracking-widest">API Key</span>
                   </div>
-                  <div class="h-1 flex-grow bg-neutral-300 dark:bg-neutral-700 rounded-full"></div>
                 </div>
-                <span class="text-[8px] text-neutral-400 font-mono mt-3">Bearer Authentication</span>
+                <span class="text-[8px] text-neutral-500 dark:text-neutral-400 font-mono mt-2">Bearer Authentication</span>
               </div>
 
               <!-- Step 2: Gateway -->
@@ -421,19 +431,20 @@
                   <i data-lucide="arrow-left-right" class="w-6 h-6 text-[#b84a39]"></i>
                 </div>
                 <div>
-                  <span class="text-[11px] font-bold text-neutral-800 dark:text-neutral-200">API Gateway</span>
-                  <p class="text-[8px] text-neutral-400 font-mono mt-0.5">The Waiter</p>
+                  <span class="text-[11px] font-bold text-neutral-900 dark:text-white">API Gateway</span>
+                  <p class="text-[8px] text-neutral-600 dark:text-neutral-400 font-mono mt-0.5">The Waiter</p>
                 </div>
               </div>
 
-              <!-- Pipe 2 -->
-              <div class="flex-grow flex flex-col items-center relative mx-1 min-w-[70px]">
-                <div class="w-full flex items-center justify-center">
-                  <div class="h-1 flex-grow bg-neutral-300 dark:bg-neutral-700 rounded-full"></div>
-                  <i data-lucide="arrow-left-right" class="w-4 h-4 text-neutral-400 -my-2.5 z-10"></i>
-                  <div class="h-1 flex-grow bg-neutral-300 dark:bg-neutral-700 rounded-full"></div>
+              <!-- Pipe 2 with SVG flow animation -->
+              <div class="flex-grow flex flex-col items-center relative mx-1 min-w-[90px]">
+                <div class="w-full flex items-center justify-center relative h-6">
+                  <svg class="w-full h-2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="0" y1="4" x2="100%" y2="4" stroke="var(--accent-bg)" stroke-width="2.5" class="animate-flow" />
+                  </svg>
+                  <i data-lucide="arrow-left-right" class="w-4 h-4 text-neutral-500 dark:text-neutral-400 absolute right-0"></i>
                 </div>
-                <span class="text-[8px] text-neutral-400 font-mono mt-3">HTTPS REST</span>
+                <span class="text-[8px] text-neutral-500 dark:text-neutral-400 font-mono mt-2">HTTPS REST API</span>
               </div>
 
               <!-- Step 3: Cloud Gemini -->
@@ -443,8 +454,8 @@
                   <span class="absolute -top-1.5 -right-1.5 px-2 py-0.5 bg-green-500 rounded-full border-2 border-white dark:border-neutral-900 text-[8px] text-white font-bold animate-pulse">RES</span>
                 </div>
                 <div>
-                  <span class="text-[11px] font-bold text-neutral-800 dark:text-neutral-200">Gemini Cloud</span>
-                  <p class="text-[8px] text-neutral-400 font-mono mt-0.5">Large Language Model</p>
+                  <span class="text-[11px] font-bold text-neutral-900 dark:text-white">Gemini Cloud</span>
+                  <p class="text-[8px] text-neutral-600 dark:text-neutral-400 font-mono mt-0.5">Large Language Model</p>
                 </div>
               </div>
 
