@@ -33,7 +33,7 @@ Now, let's add the extension to your browser:
 2. In the address bar, type `chrome://extensions/` and press **Enter** (or click the three dots at the top right of Chrome -> **Extensions** -> **Manage Extensions**).
 3. In the top right corner of the Extensions page, toggle the switch for **Developer mode** to the **On** position.
 4. In the top left corner, click the **Load unpacked** button.
-5. Browse your files, select the folder where you extracted the ZIP archive (the folder containing `manifest.json`), and click **Select Folder** (or **Open**).
+5. Browse your files, select the **`bento-language-companion`** folder inside the extracted project directory, and click **Select Folder** (or **Open**).
 6. The *Bento Language Companion* will now appear in your list of extensions! Click the puzzle piece icon in your Chrome toolbar and pin it for easy access.
 
 ---
