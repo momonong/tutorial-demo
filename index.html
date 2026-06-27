@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cracking the Extension Code — Presentation</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- PptxGenJS CDN Library -->
+  <script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgenjs.bundle.js"></script>
+  <!-- Google Fonts: Inter (Sans), Lora (Serif), Playfair Display (Display Serif) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind Configuration mapping neutral system colors to dynamic CSS variables -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            serif: ['Lora', 'Georgia', 'serif'],
+            display: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            neutral: {
+              900: 'var(--text-primary)',
+              800: 'var(--text-primary)',
+              700: 'var(--text-secondary)',
+              600: 'var(--text-secondary)',
+              500: 'var(--text-secondary)',
+              400: 'var(--text-muted)',
+              300: 'var(--text-muted)',
+              200: 'var(--border-color)',
+              100: 'var(--code-bg)',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      /* Default: Dark mode values */
+      --bg-body: #0a0a0a;
+      --bg-radial-start: #18181b;
+      --bg-radial-end: #0a0a0a;
+      --bg-main: #0f0f11;
+      --bg-card: rgba(20, 20, 20, 0.7);
+      --border-color: #262626;
+      --border-main: #262626;
+      --shadow-color: #16161e;
+      --text-primary: #ffffff;
+      --text-secondary: #a3a3a3;
+      --text-muted: #525252;
+      --accent-color: #c084fc; /* electric purple */
+      --accent-bg: #a855f7;
+      --accent-hover: #c084fc;
+      --accent-shadow: rgba(168, 85, 247, 0.4);
+      --btn-bg: #161616;
+      --btn-text: #e5e5e5;
+      --code-bg: #1e1e1e;
+      --kbd-bg: #262626;
+      --kbd-border: #404040;
+      --kbd-text: #d4d4d4;
+    }
+
+    body.light-mode {
+      /* Light mode values (Swiss Minimalist) */
+      --bg-body: #f3f4f6; 
+      --bg-radial-start: #ffffff;
+      --bg-radial-end: #e5e7eb;
+      --bg-main: #fbfbfb; /* crisp paper white */
+      --bg-card: rgba(255, 255, 255, 0.85); /* clean white cards */
+      --border-color: #e5e5e5; /* soft light-gray borders */
+      --border-main: #d1d5db;
+      --shadow-color: rgba(0, 0, 0, 0.05);
+      --text-primary: #1a1a1a; /* deep charcoal text */
+      --text-secondary: #4b5563; /* charcoal secondary */
+      --text-muted: #9ca3af;
+      --accent-color: #4f46e5; /* deep indigo */
+      --accent-bg: #6366f1; /* rich violet */
+      --accent-hover: #4f46e5;
+      --accent-shadow: rgba(99, 102, 241, 0.15);
+      --btn-bg: #f9fafb;
+      --btn-text: #374151;
+      --code-bg: #f3f4f6;
+      --kbd-bg: #e5e7eb;
+      --kbd-border: #d1d5db;
+      --kbd-text: #374151;
+    }
+
+    /* Premium dark/light tech radial gradient background */
+    body {
+      background-color: var(--bg-body) !important;
+      background-image: radial-gradient(circle at center, var(--bg-radial-start) 0%, var(--bg-radial-end) 100%) !important;
+      color: var(--text-primary) !important;
+      transition: background-color 0.3s ease, background-image 0.3s ease, color 0.3s ease;
+    }
+    body.light-mode {
+      background-image: none !important;
+    }
+    
+    /* Main slide deck frame overrides */
+    main {
+      background-color: var(--bg-main) !important;
+      border-color: var(--border-main) !important;
+      box-shadow: 8px 8px 0px var(--shadow-color) !important;
+      transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .slide-transition {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    /* Dynamic Glassmorphism cards with fine dark/light borders & neon accent hover shadows */
+    .bg-white, .bento-card {
+      background-color: var(--bg-card) !important;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color) !important;
+      box-shadow: 2px 2px 0px var(--shadow-color) !important;
+      color: var(--text-primary) !important;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .bg-white:hover, .bento-card:hover {
+      border-color: var(--accent-bg) !important; 
+      box-shadow: 0 0 15px var(--accent-shadow) !important;
+      transform: translateY(-2px);
+    }
+    /* Map inline custom colors to cyber neon / indigo accents */
+    .text-\[\#b84a39\] {
+      color: var(--accent-color) !important;
+    }
+    .bg-\[\#b84a39\] {
+      background-color: var(--accent-bg) !important;
+      box-shadow: 0 0 10px var(--accent-shadow);
+    }
+    .text-red-600 {
+      color: #f87171 !important; /* Soft error red */
+    }
+    body.light-mode .text-red-600 {
+      color: #dc2626 !important; /* Legible red for light mode */
+    }
+    .bg-neutral-100 {
+      background-color: var(--code-bg) !important;
+    }
+    
+    /* Premium theme controllers */
+    .btn-control {
+      border: 1px solid var(--border-color) !important;
+      background-color: var(--btn-bg) !important;
+      color: var(--btn-text) !important;
+      box-shadow: 2px 2px 0px var(--shadow-color) !important;
+      transition: all 0.2s ease;
+    }
+    .btn-control:hover:not(:disabled) {
+      border-color: var(--accent-bg) !important;
+      color: var(--accent-color) !important;
+      box-shadow: 2px 2px 0px var(--accent-bg) !important;
+    }
+    .btn-control:disabled {
+      opacity: 0.2;
+    }
+    .btn-primary {
+      background-color: var(--accent-bg) !important;
+      color: #ffffff !important;
+      border-color: var(--accent-bg) !important;
+    }
+    .btn-primary:hover:not(:disabled) {
+      background-color: var(--bg-main) !important;
+      color: var(--accent-color) !important;
+      border-color: var(--accent-bg) !important;
+    }
+
+    #theme-toggle-btn {
+      border-color: var(--border-color) !important;
+      color: var(--text-secondary) !important;
+    }
+    #theme-toggle-btn:hover {
+      color: var(--accent-color) !important;
+      border-color: var(--accent-bg) !important;
+    }
+
+    kbd {
+      background-color: var(--kbd-bg) !important;
+      border-color: var(--kbd-border) !important;
+      color: var(--kbd-text) !important;
+    }
+    #export-pptx-btn {
+      background-color: var(--bg-card) !important;
+      border-color: var(--border-color) !important;
+      color: var(--text-primary) !important;
+    }
+    #export-pptx-btn:hover {
+      border-color: var(--accent-bg) !important;
+      color: var(--accent-color) !important;
+      box-shadow: 0px 0px 12px var(--accent-shadow) !important;
+    }
+  </style>
+</head>
+<body class="min-h-screen w-screen flex flex-col items-center justify-center p-4 md:p-8 font-sans text-neutral-900 select-none overflow-x-hidden">
+
+  <!-- Main Presentation Container (Dynamic responsive scaling to maximize screen) -->
+  <main class="w-full max-w-[94vw] 2xl:max-w-[85vw] h-[82vh] min-h-[640px] max-h-[850px] bg-[#0f0f11] border-2 border-[#262626] shadow-[8px_8px_0px_#16161e] flex flex-col justify-between p-6 md:p-10 relative overflow-hidden">
+    
+    <header class="flex justify-between items-center border-b border-[#262626] pb-4 mb-6">
+      <div class="flex items-center gap-3">
+        <span class="w-2.5 h-2.5 bg-[#b84a39] inline-block"></span>
+        <span class="text-[10px] font-bold tracking-widest uppercase text-neutral-500">Linguistic Tech Seminar</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <!-- Premium Theme Toggle Button -->
+        <button id="theme-toggle-btn" class="flex items-center gap-1.5 text-[9px] font-bold tracking-widest uppercase transition-colors border px-2 py-1 bg-transparent rounded-none">
+          <span id="theme-toggle-icon">🌙</span> <span id="theme-toggle-text">Dark</span>
+        </button>
+        <div class="font-serif font-semibold text-sm tracking-wide" id="slide-counter">01 / 05</div>
+      </div>
+    </header>
+
+    <!-- Slide Viewport -->
+    <div class="flex-grow relative flex flex-col justify-center">
+
+      <!-- Slide 1: Title Slide -->
+      <div class="slide slide-transition opacity-100 transform translate-x-0 flex flex-col justify-between h-full" id="slide-1">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 flex-grow items-stretch">
+          <!-- Main Block (Span 2) -->
+          <div class="md:col-span-2 bg-white border border-black p-8 md:p-12 flex flex-col justify-between shadow-[2px_2px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:-translate-y-0.5 transition-all">
+            <span class="text-[9px] font-bold tracking-widest text-[#b84a39] uppercase mb-4">Lecture Keynote</span>
+            <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-neutral-900 mt-2 mb-8">
+              Cracking the <br class="hidden md:inline">Extension Code
+            </h1>
+            <div class="border-t border-neutral-100 pt-4 mt-auto">
+              <span class="text-xs font-medium text-neutral-500 font-serif italic">Integrating Large Language Models inside Chrome Extensions</span>
+            </div>
+          </div>
+          
+          <!-- Column 3 Stack -->
+          <div class="flex flex-col gap-6">
+            <!-- Sub-Block -->
+            <div class="bg-white border border-black p-6 flex flex-col justify-between shadow-[2px_2px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:-translate-y-0.5 transition-all flex-grow">
+              <span class="text-[9px] font-bold tracking-widest text-neutral-400 uppercase">Core Objective</span>
+              <p class="font-serif text-sm leading-relaxed text-neutral-700 mt-4">
+                Wielding AI and APIs to Power Up Your Browser Extensions
+              </p>
+            </div>
+            
+            <!-- Meta-Block -->
+            <div class="bg-white border border-black p-6 flex flex-col justify-between shadow-[2px_2px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:-translate-y-0.5 transition-all flex-grow">
+              <span class="text-[9px] font-bold tracking-widest text-neutral-400 uppercase">Target Audience</span>
+              <p class="font-sans text-xs font-semibold text-neutral-800 uppercase mt-4 tracking-wider leading-snug">
+                A Practical Guide for Foreign Languages & Literature Creators
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Extension Anatomy 101 -->
+      <div class="slide slide-transition hidden opacity-0 transform translate-x-12 flex flex-col justify-between h-full" id="slide-2">
+        <div class="mb-4">
+          <span class="text-[9px] font-bold tracking-widest text-neutral-400 uppercase">Chapter 01</span>
+          <h2 class="font-serif text-xl font-bold mt-1 text-neutral-800">Extension Anatomy 101</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 flex-grow items-stretch my-auto">
+          <!-- Card A: Frontend (Stage) -->
+          <div class="bg-white border border-black p-6 flex flex-col justify-between shadow-[2px_2px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:-translate-y-0.5 transition-all min-h-[160px]">
+            <span class="text-[9px] font-bold tracking-widest text-[#b84a39] uppercase">The Stage</span>
+            <div>
+              <h3 class="font-serif text-md font-bold mt-2 mb-1 text-neutral-800">The Frontend</h3>
+              <p class="text-xs text-neutral-600 leading-relaxed">
+                Your <code class="bg-neutral-100 px-1 font-mono text-[10px]">popup.html</code> and interactive modules. What users see, select, click, and touch.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card B: Backend (Backstage) -->
+          <div class="bg-white border border-black p-6 flex flex-col justify-between shadow-[2px_2px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:-translate-y-0.5 transition-all min-h-[160px]">
+            <span class="text-[9px] font-bold tracking-widest text-[#b84a39] uppercase">The Backstage</span>
+            <div>
+              <h3 class="font-serif text-md font-bold mt-2 mb-1 text-neutral-800">The Backend</h3>
+              <p class="text-xs text-neutral-600 leading-relaxed">
+                Your Background Service Worker (<code class="bg-neutral-100 px-1 font-mono text-[10px]">background.js</code>). The invisible, event-driven logical core.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card C: The Problem (Brain) -->
+          <div class="bg-white border border-black p-6 flex flex-col justify-between shadow-[2px_2px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:-translate-y-0.5 transition-all min-h-[160px] md:col-span-3">
+            <span class="text-[9px] font-bold tracking-widest text-neutral-400 uppercase">The Critical Paradox</span>
+            <div class="md:flex md:justify-between md:items-baseline mt-2">
+              <h3 class="font-serif text-lg font-semibold text-[#b84a39] md:w-1/3">Static code is boring.</h3>
+              <p class="text-xs text-neutral-700 leading-relaxed md:w-2/3 md:pl-4">
+                Without a language model, our extension is just a passive form. How do we give our extension a real, dynamic linguistic brain to interpret vocabulary, registers, and context?
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: The Missing Link -->
+      <div class="slide slide-transition hidden opacity-0 transform translate-x-12 flex flex-col justify-between h-full" id="slide-3">
+        <div class="mb-4">
+          <span class="text-[9px] font-bold tracking-widest text-neutral-400 uppercase">Chapter 02</span>
+          <h2 class="font-serif text-xl font-bold mt-1 text-neutral-800">The Missing Link — What is an API?</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 flex-grow items-stretch my-auto">
+          <!-- Card 1: Concept -->
+          <div class="md:col-span-2 bg-white border border-black p-6 flex flex-col justify-between shadow-[2px_2px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:-translate-y-0.5 transition-all">
+            <span class="text-[9px] font-bold tracking-widest text-[#b84a39] uppercase">Linguistic Messenger</span>
+            <div class="mt-4">
+              <h3 class="font-serif text-xl font-semibold mb-2">API: Application Programming Interface</h3>
+              <p class="text-xs text-neutral-600 leading-relaxed">
+                The structured digital protocol connecting your client browser with remote computational resources. It serves as a secure courier transmitting your parameters.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 2: Analogy -->
+          <div class="bg-white border border-black p-6 flex flex-col justify-between shadow-[2px_2px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:-translate-y-0.5 transition-all">
+            <span class="text-[9px] font-bold tracking-widest text-neutral-400 uppercase">Analogy</span>
+            <p class="text-xs text-neutral-700 leading-relaxed font-serif italic mt-4">
+              "Think of it as a waiter taking your text request from the browser to a massive AI model in the cloud, and delivering back the parsed translation plate."
+            </p>
+          </div>
+
+          <!-- Card 3: Credentials -->
+          <div class="md:col-span-3 bg-white border border-black p-6 flex flex-col justify-between shadow-[2px_2px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:-translate-y-0.5 transition-all">
+            <div class="flex items-center justify-between">
+              <span class="text-[9px] font-bold tracking-widest text-[#b84a39] uppercase">Access Key</span>
+              <span class="text-[8px] border border-neutral-300 px-2 py-0.5 rounded-full font-mono">SECURE / AUTH</span>
+            </div>
+            <p class="text-sm font-serif text-neutral-800 mt-3">
+              To unlock it, you just need a digital passport: <strong>The API Key</strong>. It authenticates your requests and grants you access to cloud-based intelligence.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: Dev Life -->
+      <div class="slide slide-transition hidden opacity-0 transform translate-x-12 flex flex-col justify-between h-full" id="slide-4">
+        <div class="mb-4">
+          <span class="text-[9px] font-bold tracking-widest text-neutral-400 uppercase">Chapter 03</span>
+          <h2 class="font-serif text-xl font-bold mt-1 text-neutral-800">The Reality of Dev Life — Embracing Red Text</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow items-stretch my-auto">
+          <!-- Card 1: Rule #1 -->
+          <div class="bg-white border border-black p-8 flex flex-col justify-between shadow-[2px_2px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:-translate-y-0.5 transition-all min-h-[220px]">
+            <div>
+              <span class="text-[9px] font-bold tracking-widest text-[#b84a39] uppercase">First Principles</span>
+              <h3 class="font-serif text-lg font-semibold mt-4 mb-2">Rule #1: Console Output</h3>
+            </div>
+            <p class="text-xs text-neutral-600 leading-relaxed font-serif">
+              "Error codes (<span class="font-semibold text-red-600 font-mono">401 Unauthorized</span>, <span class="font-semibold text-red-600 font-mono">403 Forbidden</span>) are not failures. They are navigational signs telling you exactly where the bridge fell."
+            </p>
+          </div>
+
+          <!-- Card 2: Action Block -->
+          <div class="bg-white border border-black p-8 flex flex-col justify-between shadow-[2px_2px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:-translate-y-0.5 transition-all min-h-[220px]">
+            <div>
+              <span class="text-[9px] font-bold tracking-widest text-neutral-400 uppercase">Mental Shift</span>
+              <h3 class="font-serif text-lg font-semibold mt-4 mb-2">Modern Debugging Mindset</h3>
+            </div>
+            <p class="text-xs text-neutral-700 leading-relaxed">
+              Never panic. When the extension fails or throws red warnings, do not guess: <strong>just copy-paste the raw red text directly into your AI assistant</strong>. Let it diagnose the syntax or credential leak.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5: Live Hunt -->
+      <div class="slide slide-transition hidden opacity-0 transform translate-x-12 flex flex-col justify-between h-full" id="slide-5">
+        <div class="mb-4">
+          <span class="text-[9px] font-bold tracking-widest text-neutral-400 uppercase">Chapter 04</span>
+          <h2 class="font-serif text-xl font-bold mt-1 text-neutral-800">Live Hunt — Claiming Student Treasures</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 flex-grow items-stretch my-auto">
+          <!-- Card 1: Treasury Block -->
+          <div class="bg-white border border-black p-6 flex flex-col justify-between shadow-[2px_2px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:-translate-y-0.5 transition-all min-h-[180px]">
+            <span class="text-[9px] font-bold tracking-widest text-[#b84a39] uppercase">The Platform</span>
+            <div>
+              <h3 class="font-serif text-sm font-bold mt-2 text-neutral-800">Google AI Studio</h3>
+              <p class="text-xs text-neutral-600 leading-relaxed mt-2">
+                Get generous, free Gemini API quotas using your university email address. No credit card required.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 2: Action prompt (Span 2) -->
+          <div class="md:col-span-2 bg-white border border-black p-6 flex flex-col justify-between shadow-[2px_2px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:-translate-y-0.5 transition-all min-h-[180px]">
+            <span class="text-[9px] font-bold tracking-widest text-neutral-400 uppercase">Live Practice</span>
+            <div class="mt-2">
+              <h3 class="font-serif text-md font-semibold text-neutral-800">Demo Walkthrough:</h3>
+              <p class="text-xs text-neutral-700 leading-relaxed font-serif italic mt-2">
+                "Let's intentionally run a broken extension, inspect the Chrome console, grab an API Key from Google AI Studio, and link it to bring its language-assistant brain to life."
+              </p>
+            </div>
+            <div class="mt-4 flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+              <span class="text-[8px] font-bold tracking-widest uppercase text-neutral-500">Ready for Live Demonstration</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Presentation Footer Controllers -->
+    <footer class="flex justify-between items-center border-t border-[#262626] pt-4 mt-6">
+      <div class="text-[9px] font-medium text-neutral-500 uppercase tracking-widest hidden sm:block">
+        Navigate with <kbd class="px-1.5 py-0.5 bg-neutral-800 border border-neutral-700 rounded font-sans text-neutral-300">←</kbd> / <kbd class="px-1.5 py-0.5 bg-neutral-800 border border-neutral-700 rounded font-sans text-neutral-300">→</kbd> arrows
+      </div>
+      
+      <!-- Controller Buttons -->
+      <div class="flex items-center gap-4 ml-auto w-full sm:w-auto justify-between sm:justify-end">
+        <button class="btn-control px-4 py-2 text-xs font-bold uppercase tracking-wider disabled:opacity-20 disabled:pointer-events-none" id="prev-btn" disabled>
+          Previous
+        </button>
+        <button class="btn-control px-4 py-2 text-xs font-bold uppercase tracking-wider btn-primary" id="next-btn">
+          Next
+        </button>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- PPTX Export Floating Button -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <button id="export-pptx-btn" class="flex items-center gap-2 px-5 py-3 bg-[#121212]/80 backdrop-blur border border-[#262626] text-white hover:text-[#c084fc] hover:border-[#a855f7] hover:shadow-[0_0_15px_rgba(168,85,247,0.4)] active:scale-95 transition-all text-xs font-bold uppercase tracking-wider">
+      <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" width="16" height="16"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+      Export to PPTX
+    </button>
+  </div>
+
+  <!-- Navigation & Export JavaScript -->
+  <script>
+    // State management
+    let currentSlide = 1;
+    const totalSlides = 5;
+
+    // Elements
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+    const slideCounter = document.getElementById("slide-counter");
+
+    // Slide update handler
+    function updateSlides(direction) {
+      const oldSlideEl = document.getElementById(`slide-${currentSlide}`);
+      
+      if (direction === 'next' && currentSlide < totalSlides) {
+        currentSlide++;
+      } else if (direction === 'prev' && currentSlide > 1) {
+        currentSlide--;
+      }
+
+      const newSlideEl = document.getElementById(`slide-${currentSlide}`);
+
+      // Hide all slides
+      for (let i = 1; i <= totalSlides; i++) {
+        const slide = document.getElementById(`slide-${i}`);
+        slide.classList.add("hidden");
+        slide.classList.remove("opacity-100", "translate-x-0");
+        slide.classList.add("opacity-0", "translate-x-12");
+      }
+
+      // Show current slide with elegant transition
+      newSlideEl.classList.remove("hidden");
+      
+      // Force repaint to trigger CSS transitions
+      void newSlideEl.offsetWidth;
+
+      newSlideEl.classList.remove("opacity-0", "translate-x-12");
+      newSlideEl.classList.add("opacity-100", "translate-x-0");
+
+      // Update counters & buttons
+      slideCounter.textContent = `0${currentSlide} / 0${totalSlides}`;
+      
+      // Control disable states
+      prevBtn.disabled = (currentSlide === 1);
+      nextBtn.disabled = (currentSlide === totalSlides);
+      
+      // Visual text adjustments on final slide
+      if (currentSlide === totalSlides) {
+        nextBtn.textContent = "Finish";
+      } else {
+        nextBtn.textContent = "Next";
+      }
+    }
+
+    // Click listeners
+    prevBtn.addEventListener("click", () => updateSlides('prev'));
+    nextBtn.addEventListener("click", () => {
+      if (currentSlide < totalSlides) {
+        updateSlides('next');
+      } else {
+        alert("Presentation finished! Happy coding! 🚀");
+      }
+    });
+
+    // Keyboard listeners
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === "Right") {
+        updateSlides('next');
+      } else if (e.key === "ArrowLeft" || e.key === "Left") {
+        updateSlides('prev');
+      }
+    });
+
+    // --- PowerPoint Export System ---
+    document.getElementById("export-pptx-btn").addEventListener("click", exportPresentationToPPTX);
+
+    function parseSlideCards(slideId) {
+      const slideDiv = document.getElementById(slideId);
+      if (!slideDiv) return null;
+      
+      const headerEl = slideDiv.querySelector('h2');
+      const chapterEl = slideDiv.querySelector('span');
+      
+      const chapter = chapterEl ? chapterEl.textContent.trim() : "";
+      const title = headerEl ? headerEl.textContent.trim() : "";
+      
+      const grid = slideDiv.querySelector('.grid');
+      const cardEls = grid ? Array.from(grid.children) : [];
+      
+      const parsedCards = cardEls.map(card => {
+        const categoryEl = card.querySelector('span');
+        const category = categoryEl ? categoryEl.textContent.trim() : "";
+        
+        const h3El = card.querySelector('h3');
+        let cardTitle = h3El ? h3El.textContent.trim() : "";
+        
+        const pEl = card.querySelector('p, blockquote');
+        let cardBody = pEl ? pEl.textContent.trim() : "";
+        
+        if (!cardTitle && card.querySelector('strong')) {
+          cardTitle = card.querySelector('strong').textContent.trim();
+        }
+        
+        if (cardTitle && cardBody.startsWith(cardTitle)) {
+          cardBody = cardBody.replace(cardTitle, "").trim();
+        }
+        
+        return { category, title: cardTitle, body: cardBody };
+      });
+      
+      return { chapter, title, cards: parsedCards };
+    }
+
+    function exportPresentationToPPTX() {
+      try {
+        let pptx = new PptxGenJS();
+        pptx.layout = "LAYOUT_16x9";
+        
+        // Slide 1: Title Slide (special layout)
+        let slide1 = pptx.addSlide();
+        slide1.background = { fill: "0A0A0A" };
+        
+        // Main block rectangle shape
+        slide1.addShape(pptx.shapes.RECTANGLE, { 
+          x: 0.5, y: 0.5, w: 5.5, h: 4.6, 
+          fill: "141414", 
+          line: { color: "262626", width: 1.5 } 
+        });
+        
+        slide1.addText("LECTURE KEYNOTE", { 
+          x: 0.8, y: 0.8, w: 5.0, h: 0.3, 
+          fontSize: 9, fontFace: "Arial", color: "A855F7", bold: true 
+        });
+        
+        slide1.addText("Cracking the\nExtension Code", { 
+          x: 0.8, y: 1.3, w: 5.0, h: 2.2, 
+          fontSize: 34, fontFace: "Georgia", color: "FFFFFF", bold: true 
+        });
+        
+        slide1.addText("Integrating Large Language Models inside Chrome Extensions", { 
+          x: 0.8, y: 3.7, w: 5.0, h: 0.8, 
+          fontSize: 12, fontFace: "Georgia", color: "A3A3A3", italic: true 
+        });
+        
+        // Column 3 Stack: Block 1
+        slide1.addShape(pptx.shapes.RECTANGLE, { 
+          x: 6.2, y: 0.5, w: 3.3, h: 2.15, 
+          fill: "141414", 
+          line: { color: "262626", width: 1.5 } 
+        });
+        
+        slide1.addText("CORE OBJECTIVE", { 
+          x: 6.4, y: 0.7, w: 2.9, h: 0.3, 
+          fontSize: 8, fontFace: "Arial", color: "A3A3A3", bold: true 
+        });
+        
+        slide1.addText("Wielding AI and APIs to Power Up Your Browser Extensions", { 
+          x: 6.4, y: 1.1, w: 2.9, h: 1.3, 
+          fontSize: 13, fontFace: "Georgia", color: "FFFFFF" 
+        });
+        
+        // Column 3 Stack: Block 2
+        slide1.addShape(pptx.shapes.RECTANGLE, { 
+          x: 6.2, y: 2.95, w: 3.3, h: 2.15, 
+          fill: "141414", 
+          line: { color: "262626", width: 1.5 } 
+        });
+        
+        slide1.addText("TARGET AUDIENCE", { 
+          x: 6.4, y: 3.15, w: 2.9, h: 0.3, 
+          fontSize: 8, fontFace: "Arial", color: "A3A3A3", bold: true 
+        });
+        
+        slide1.addText("A Practical Guide for Foreign Languages & Literature Creators", { 
+          x: 6.4, y: 3.5, w: 2.9, h: 1.3, 
+          fontSize: 12, fontFace: "Arial", color: "C084FC", bold: true 
+        });
+
+        // Slides 2 to 5
+        for (let i = 2; i <= totalSlides; i++) {
+          const slideData = parseSlideCards(`slide-${i}`);
+          if (!slideData) continue;
+          
+          let slide = pptx.addSlide();
+          slide.background = { fill: "0A0A0A" };
+          
+          // Slide Header
+          slide.addText(slideData.chapter.toUpperCase(), { 
+            x: 0.5, y: 0.3, w: 9.0, h: 0.25, 
+            fontSize: 9, fontFace: "Arial", color: "A855F7", bold: true 
+          });
+          
+          slide.addText(slideData.title, { 
+            x: 0.5, y: 0.55, w: 9.0, h: 0.45, 
+            fontSize: 20, fontFace: "Georgia", color: "FFFFFF", bold: true 
+          });
+          
+          // Thin dividing line
+          slide.addShape(pptx.shapes.RECTANGLE, { 
+            x: 0.5, y: 1.05, w: 9.0, h: 0.02, 
+            fill: "262626" 
+          });
+          
+          // Render cards
+          const numCards = slideData.cards.length;
+          slideData.cards.forEach((card, idx) => {
+            const cardW = numCards === 3 ? 2.8 : 4.35;
+            const cardGap = 0.3;
+            const cardL = 0.5 + idx * (cardW + cardGap);
+            const cardY = 1.3;
+            const cardH = 3.6;
+            
+            // Draw card border & background
+            slide.addShape(pptx.shapes.RECTANGLE, { 
+              x: cardL, y: cardY, w: cardW, h: cardH, 
+              fill: "141414", 
+              line: { color: "262626", width: 1 } 
+            });
+            
+            // Category tag
+            if (card.category) {
+              slide.addText(card.category.toUpperCase(), { 
+                x: cardL + 0.25, y: cardY + 0.25, w: cardW - 0.5, h: 0.25, 
+                fontSize: 8, fontFace: "Arial", color: "A855F7", bold: true 
+              });
+            }
+            
+            // Title
+            if (card.title) {
+              slide.addText(card.title, { 
+                x: cardL + 0.25, y: cardY + 0.55, w: cardW - 0.5, h: 0.6, 
+                fontSize: 13, fontFace: "Georgia", color: "FFFFFF", bold: true 
+              });
+            }
+            
+            // Body Content
+            if (card.body) {
+              const bodyY = card.title ? (cardY + 1.25) : (cardY + 0.55);
+              const bodyH = cardH - (bodyY - cardY) - 0.25;
+              slide.addText(card.body, { 
+                x: cardL + 0.25, y: bodyY, w: cardW - 0.5, h: bodyH, 
+                fontSize: 11, fontFace: "Arial", color: "A3A3A3", lineSpacing: 16 
+              });
+            }
+          });
+        }
+        
+        // Trigger presentation download
+        pptx.writeFile({ fileName: "Cracking_the_Extension_Code.pptx" });
+      } catch (err) {
+        console.error("Failed to generate PPTX: ", err);
+        alert("PowerPoint Export Failed: Check console for logs.");
+      }
+    }
+
+    // --- Theme Toggle System ---
+    const themeToggleBtn = document.getElementById("theme-toggle-btn");
+    const themeToggleIcon = document.getElementById("theme-toggle-icon");
+    const themeToggleText = document.getElementById("theme-toggle-text");
+    
+    // Check local storage theme settings on load
+    if (localStorage.getItem("theme") === "light") {
+      enableLightMode();
+    }
+
+    themeToggleBtn.addEventListener("click", () => {
+      if (document.body.classList.contains("light-mode")) {
+        disableLightMode();
+      } else {
+        enableLightMode();
+      }
+    });
+
+    function enableLightMode() {
+      document.body.classList.add("light-mode");
+      themeToggleIcon.textContent = "☀️";
+      themeToggleText.textContent = "Light";
+      localStorage.setItem("theme", "light");
+    }
+
+    function disableLightMode() {
+      document.body.classList.remove("light-mode");
+      themeToggleIcon.textContent = "🌙";
+      themeToggleText.textContent = "Dark";
+      localStorage.setItem("theme", "dark");
+    }
+  </script>
+</body>
+</html>

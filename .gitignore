@@ -1,0 +1,25 @@
+# Security & API Keys (最重要！絕對不能傳上 GitHub)
+.env
+*.env
+secrets.json
+api_key.txt
+key.json
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+*.log
+
+# IDEs and Code Editors
+.vscode/
+.cursor/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Browser Extension Build Artifacts (如果你們有打包的話)
+*.crx
+*.xpi
+*.zip

@@ -1,0 +1,683 @@
+/* CSS Design System - Bento Language Companion (Swiss Minimalism) */
+
+:root {
+  /* Bright & Spacious Theme Variables */
+  --bg-app: #fbfbf9;
+  --bg-card: #ffffff;
+  --text-primary: #111111;
+  --text-secondary: #4a4a4a;
+  --text-muted: #888888;
+  --border-color: #111111;
+  --border-secondary: #e5e5e0;
+  --accent-color: #b84a39; /* Muted Swiss Terracotta */
+  --accent-light: #fdf5f4;
+  --focus-shadow: 3px 3px 0px #111111;
+  --card-shadow: 1px 1px 0px rgba(0, 0, 0, 0.05);
+  
+  /* Fonts */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Lora', 'Georgia', serif;
+  --font-logo: 'Playfair Display', serif;
+}
+
+/* Base resets & layout */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  width: 720px;
+  height: 580px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-container {
+  padding: 16px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Bento Grid Configuration */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 105px 210px 200px;
+  gap: 12px;
+  width: 100%;
+  height: 100%;
+}
+
+/* Bento Card Base */
+.bento-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.bento-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 2px 2px 0px var(--border-color);
+}
+
+/* Card Meta (Swiss labels, upper-case, small) */
+.card-meta, .card-meta-row {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.card-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--border-secondary);
+  padding-bottom: 4px;
+}
+
+/* Card 1: Branding Details */
+.card-branding {
+  grid-column: 1;
+  grid-row: 1;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.logo-text {
+  font-family: var(--font-logo);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.logo-sub {
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.theme-placeholder {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 8px;
+  margin-top: auto;
+  border-top: 1px dashed var(--border-secondary);
+  padding-top: 4px;
+}
+
+.theme-label {
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.theme-status {
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+/* Card 2: API Connection */
+.card-api {
+  grid-column: 2;
+  grid-row: 1;
+  justify-content: space-between;
+}
+
+.api-status-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #d97706; /* Amber default */
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.status-dot.connected {
+  background-color: #16a34a; /* Green */
+}
+
+.status-text {
+  color: var(--text-secondary);
+}
+
+.api-input-wrapper {
+  display: flex;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-app);
+  height: 24px;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.api-input-wrapper input {
+  border: none;
+  background: transparent;
+  padding: 0 6px;
+  font-size: 10px;
+  width: 100%;
+  color: var(--text-primary);
+  font-family: monospace;
+}
+
+.api-input-wrapper input:focus {
+  outline: none;
+}
+
+.btn-save-key {
+  height: 22px;
+  font-size: 9px;
+  line-height: 20px;
+  padding: 0;
+  background-color: var(--text-primary);
+  color: #ffffff;
+  border: 1px solid var(--border-color);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.1s;
+}
+
+.btn-save-key:hover {
+  background-color: #ffffff;
+  color: var(--text-primary);
+}
+
+/* Card 3: Daily Lexeme */
+.card-lexeme {
+  grid-column: 3;
+  grid-row: 1;
+  background-color: var(--bg-card);
+}
+
+.lexeme-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+}
+
+.lexeme-word {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+.lexeme-details {
+  font-size: 9px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.lexeme-pos {
+  font-style: italic;
+}
+
+.lexeme-ipa {
+  margin-left: 4px;
+  font-family: var(--font-sans);
+}
+
+.lexeme-definition {
+  font-size: 10px;
+  line-height: 1.3;
+  color: var(--text-secondary);
+  font-style: italic;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Card 4: Vocabulary Companion */
+.card-vocab {
+  grid-column: 1 / span 2;
+  grid-row: 2;
+}
+
+.form-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.input-group {
+  flex: 1;
+}
+
+.input-group input, .select-group select, textarea, select {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  padding: 6px 10px;
+  font-size: 11px;
+  font-family: var(--font-sans);
+  background-color: #ffffff;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.input-group input:focus, .select-group select:focus, textarea:focus, select:focus {
+  border-color: var(--accent-color);
+  box-shadow: 1px 1px 0px var(--border-color);
+}
+
+.select-group select {
+  height: 28px;
+  padding: 4px 6px;
+  cursor: pointer;
+}
+
+.btn {
+  border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.1s ease;
+  height: 28px;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background-color: var(--text-primary);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #ffffff;
+  color: var(--text-primary);
+  box-shadow: var(--focus-shadow);
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-app);
+  box-shadow: var(--focus-shadow);
+}
+
+/* Output Containers */
+.output-container {
+  border: 1px dashed var(--border-secondary);
+  background-color: var(--bg-app);
+  flex-grow: 1;
+  padding: 10px;
+  position: relative;
+  overflow-y: auto;
+  font-size: 11px;
+  line-height: 1.4;
+  height: 120px;
+}
+
+.output-placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 10px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.output-result {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.result-header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  border-bottom: 1px solid var(--border-secondary);
+  padding-bottom: 4px;
+}
+
+.result-word {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.result-ipa {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.result-pos {
+  font-size: 9px;
+  text-transform: uppercase;
+  font-weight: 600;
+  background-color: var(--border-secondary);
+  padding: 1px 4px;
+}
+
+.btn-save-lexicon {
+  margin-left: auto;
+  align-self: center;
+}
+
+.result-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.result-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.result-section-title {
+  font-size: 9px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;
+}
+
+.result-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--text-secondary);
+  border-left: 2px solid var(--accent-color);
+  padding-left: 6px;
+}
+
+/* Card 5: Saved Lexicon History */
+.card-lexicon {
+  grid-column: 3;
+  grid-row: 2 / span 2;
+  height: 100%;
+}
+
+.lexicon-list-wrapper {
+  overflow-y: auto;
+  flex-grow: 1;
+  margin-top: 4px;
+  border-top: 1px solid var(--border-secondary);
+}
+
+.lexicon-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.lexicon-empty-state {
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 10px;
+  text-align: center;
+  padding: 30px 10px;
+}
+
+.lexicon-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 4px;
+  border-bottom: 1px solid var(--border-secondary);
+  transition: background-color 0.15s ease;
+  cursor: pointer;
+}
+
+.lexicon-item:hover {
+  background-color: var(--bg-app);
+}
+
+.lexicon-item-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.lexicon-item-word {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--text-primary);
+}
+
+.lexicon-item-meta {
+  font-size: 8px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.btn-delete-item {
+  opacity: 0.3;
+  transition: opacity 0.15s;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.lexicon-item:hover .btn-delete-item {
+  opacity: 0.8;
+}
+
+.btn-delete-item:hover {
+  opacity: 1 !important;
+  color: var(--accent-color);
+}
+
+/* Card 6: Style Polisher */
+.card-polish {
+  grid-column: 1 / span 2;
+  grid-row: 3;
+}
+
+.polish-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.polish-text-areas {
+  display: flex;
+  gap: 10px;
+  flex-grow: 1;
+  height: 110px;
+  margin-top: 6px;
+}
+
+.text-area-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.text-area-box label {
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.text-area-box textarea {
+  flex-grow: 1;
+  resize: none;
+  font-size: 10px;
+  line-height: 1.3;
+  border: 1px solid var(--border-color);
+  padding: 6px;
+  background-color: #ffffff;
+}
+
+.output-box {
+  background-color: var(--bg-app);
+  border: 1px dashed var(--border-secondary);
+  padding: 6px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.polish-result {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.polished-text {
+  font-family: var(--font-serif);
+  font-size: 11px;
+  color: var(--text-primary);
+  font-weight: 500;
+  line-height: 1.3;
+  margin-bottom: 4px;
+  border-bottom: 1px dashed var(--border-secondary);
+  padding-bottom: 4px;
+}
+
+.polished-explanation {
+  font-size: 9px;
+  color: var(--text-secondary);
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+
+.btn-copy {
+  align-self: flex-end;
+  height: 20px;
+  font-size: 8px;
+  padding: 0 6px;
+  line-height: 18px;
+  background-color: var(--text-primary);
+  color: #ffffff;
+}
+
+/* Icons styling */
+.icon {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  padding: 4px;
+  transition: color 0.15s;
+}
+
+.icon-btn:hover {
+  color: var(--text-primary);
+}
+
+.text-link-btn {
+  background: transparent;
+  border: none;
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Utility visibility states */
+.hidden {
+  display: none !important;
+}
+
+/* Spinner Loader */
+.loader-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 10px;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--border-secondary);
+  border-top-color: var(--accent-color);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Scrollbars styling for premium feel */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-secondary);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}

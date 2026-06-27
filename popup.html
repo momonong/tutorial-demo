@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bento Language Companion</title>
+  <!-- Google Fonts: Inter for UI/Controls, Playfair Display & Lora for Headings and Literary elements -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app-container">
+    <div class="bento-grid">
+      
+      <!-- Card 1: Branding -->
+      <header class="bento-card card-branding">
+        <div class="card-meta">EST. 2026</div>
+        <h1 class="logo-text">Bento.</h1>
+        <p class="logo-sub">Language Companion</p>
+        <div class="theme-placeholder">
+          <span class="theme-label">Aesthetic</span>
+          <span class="theme-status">Bright / Spacious</span>
+        </div>
+      </header>
+
+      <!-- Card 2: API Connection -->
+      <section class="bento-card card-api">
+        <div class="card-meta">01. AI Engine</div>
+        <h2 class="section-title">Gemini API</h2>
+        <div class="api-status-group">
+          <span class="status-dot" id="api-status-dot"></span>
+          <span class="status-text" id="api-status-text">Disconnected</span>
+        </div>
+        <div class="api-input-wrapper">
+          <input type="password" id="api-key-input" placeholder="Enter API Key..." autocomplete="off">
+          <button class="icon-btn" id="toggle-key-visibility" title="Toggle visibility">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+          </button>
+        </div>
+        <button class="btn btn-save-key" id="save-key-btn">Link Key</button>
+      </section>
+
+      <!-- Card 3: Daily Lexeme -->
+      <section class="bento-card card-lexeme">
+        <div class="card-meta">02. Daily Inspiration</div>
+        <h2 class="section-title">Daily Lexeme</h2>
+        <div class="lexeme-content">
+          <div class="lexeme-word" id="daily-word">Flâneur</div>
+          <div class="lexeme-details">
+            <span class="lexeme-pos" id="daily-pos">noun [French]</span>
+            <span class="lexeme-ipa" id="daily-ipa">/flɑˈnœʁ/</span>
+          </div>
+          <blockquote class="lexeme-definition" id="daily-def">
+            "A passionate spectator, amateur detective, and investigator of the city."
+          </blockquote>
+        </div>
+      </section>
+
+      <!-- Card 4: Vocabulary Companion -->
+      <section class="bento-card card-vocab">
+        <div class="card-meta">03. Word Deconstruction</div>
+        <h2 class="section-title">Vocabulary Companion</h2>
+        
+        <div class="form-row">
+          <div class="input-group">
+            <input type="text" id="vocab-input" placeholder="Enter word or select text on webpage..." autocomplete="off">
+          </div>
+          <div class="select-group">
+            <select id="vocab-lang">
+              <option value="English">to English</option>
+              <option value="French">to French</option>
+              <option value="German">to German</option>
+              <option value="Spanish">to Spanish</option>
+              <option value="Japanese">to Japanese</option>
+              <option value="Chinese">to Chinese</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" id="vocab-btn">Deconstruct</button>
+        </div>
+
+        <!-- Output display area -->
+        <div class="output-container" id="vocab-output-container">
+          <div class="output-placeholder" id="vocab-placeholder">
+            Enter a term above or highlight text on your current tab to inspect grammar, translation, and pronunciation.
+          </div>
+          <div class="output-result hidden" id="vocab-result">
+            <div class="result-header">
+              <span class="result-word" id="res-word">Word</span>
+              <span class="result-ipa" id="res-ipa">/ipa/</span>
+              <span class="result-pos" id="res-pos">noun</span>
+              <button class="icon-btn btn-save-lexicon" id="save-to-lexicon" title="Save to Lexicon">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"/></svg>
+              </button>
+            </div>
+            <div class="result-body">
+              <div class="result-section">
+                <h3 class="result-section-title">Translation & Meaning</h3>
+                <p id="res-meaning"></p>
+              </div>
+              <div class="result-section">
+                <h3 class="result-section-title">Etymology & Nuance</h3>
+                <p id="res-etymology"></p>
+              </div>
+              <div class="result-section">
+                <h3 class="result-section-title">Exemplar Context</h3>
+                <p class="result-quote" id="res-example"></p>
+              </div>
+            </div>
+          </div>
+          <div class="loader-spinner hidden" id="vocab-loader">
+            <div class="spinner"></div>
+            <span>Analyzing linguistic structures...</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Card 5: Saved Lexicon -->
+      <section class="bento-card card-lexicon">
+        <div class="card-meta-row">
+          <span class="card-meta">04. Personal Lexicon</span>
+          <button class="text-link-btn" id="export-lexicon-btn">Export JSON</button>
+        </div>
+        <h2 class="section-title">Saved Entries</h2>
+        
+        <div class="lexicon-list-wrapper">
+          <ul class="lexicon-list" id="lexicon-list">
+            <!-- Dynamically populated -->
+            <li class="lexicon-empty-state" id="lexicon-empty">Your saved expressions will appear here.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Card 6: Style Polisher -->
+      <section class="bento-card card-polish">
+        <div class="card-meta">05. Stylistic Refinement</div>
+        <h2 class="section-title">The Polisher</h2>
+
+        <div class="polish-form">
+          <div class="form-row">
+            <div class="select-group">
+              <select id="polish-register">
+                <option value="Academic">Academic Register</option>
+                <option value="Literary">Literary Prose</option>
+                <option value="Clear">Minimalist / Clear</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" id="polish-btn">Refine</button>
+          </div>
+          
+          <div class="polish-text-areas">
+            <div class="text-area-box">
+              <label for="polish-input">Draft Prose</label>
+              <textarea id="polish-input" placeholder="Paste your draft sentence or translation here..."></textarea>
+            </div>
+            <div class="text-area-box output-box" id="polish-output-container">
+              <div class="output-placeholder" id="polish-placeholder">
+                Your refined prose will appear here with comparative details.
+              </div>
+              <div class="polish-result hidden" id="polish-result-box">
+                <label>Polished Version</label>
+                <div class="polished-text" id="polished-text-out"></div>
+                <div class="polish-explanation" id="polished-explanation-out"></div>
+                <button class="btn btn-secondary btn-copy" id="copy-polished-btn">
+                  Copy Output
+                </button>
+              </div>
+              <div class="loader-spinner hidden" id="polish-loader">
+                <div class="spinner"></div>
+                <span>Polishing prose style...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</body>
+</html>
