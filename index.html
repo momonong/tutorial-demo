@@ -229,7 +229,9 @@
       <div class="flex items-center gap-8">
         <!-- Premium Theme Toggle Button -->
         <button id="theme-toggle-btn" class="flex items-center gap-2 text-xs font-bold tracking-widest uppercase transition-colors border px-3 py-1.5 bg-transparent rounded-none">
-          <span id="theme-toggle-icon">🌙</span> <span id="theme-toggle-text">Dark</span>
+          <i data-lucide="sun" class="w-4 h-4 block dark:hidden"></i>
+          <i data-lucide="moon" class="w-4 h-4 hidden dark:block"></i>
+          <span id="theme-toggle-text">Dark</span>
         </button>
         <div class="font-serif font-semibold text-xl tracking-wide" id="slide-counter">01 / 05</div>
       </div>
@@ -809,7 +811,6 @@
 
     // --- Theme Toggle System ---
     const themeToggleBtn = document.getElementById("theme-toggle-btn");
-    const themeToggleIcon = document.getElementById("theme-toggle-icon");
     const themeToggleText = document.getElementById("theme-toggle-text");
     
     // Check local storage theme settings on load
@@ -829,19 +830,18 @@
 
     function enableDarkMode() {
       document.body.classList.add("dark");
-      themeToggleIcon.textContent = "🌙";
       themeToggleText.textContent = "Dark";
       localStorage.setItem("theme", "dark");
-      lucide.createIcons();
     }
 
     function disableDarkMode() {
       document.body.classList.remove("dark");
-      themeToggleIcon.textContent = "☀️";
       themeToggleText.textContent = "Light";
       localStorage.setItem("theme", "light");
-      lucide.createIcons();
     }
+
+    // Initialize all Lucide Icons once
+    lucide.createIcons();
   </script>
 </body>
 </html>
