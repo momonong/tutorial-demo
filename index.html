@@ -229,8 +229,8 @@
       <div class="flex items-center gap-8">
         <!-- Premium Theme Toggle Button -->
         <button id="theme-toggle-btn" class="flex items-center gap-2 text-xs font-bold tracking-widest uppercase transition-colors border px-3 py-1.5 bg-transparent rounded-none">
-          <i data-lucide="sun" class="w-4 h-4 block dark:hidden"></i>
-          <i data-lucide="moon" class="w-4 h-4 hidden dark:block"></i>
+          <i id="theme-icon-sun" data-lucide="sun" class="w-4 h-4 hidden"></i>
+          <i id="theme-icon-moon" data-lucide="moon" class="w-4 h-4 hidden"></i>
           <span id="theme-toggle-text">Dark</span>
         </button>
         <div class="font-serif font-semibold text-xl tracking-wide" id="slide-counter">01 / 05</div>
@@ -318,7 +318,7 @@
             <div class="w-full flex flex-col sm:flex-row items-center justify-around gap-6 diagram-wrapper p-8 rounded-xl transition-all">
               
               <!-- Large Frontend Box -->
-              <div class="flex flex-col items-center gap-3 bg-white dark:bg-neutral-800 border-2 border-neutral-200 dark:border-neutral-700 p-6 rounded-lg shadow-md text-center w-52 transition-all hover:scale-105">
+              <div class="flex flex-col items-center gap-3 bg-white dark:bg-neutral-800 border-2 border-neutral-300 dark:border-neutral-500 p-6 rounded-lg shadow-md text-center w-52 transition-all hover:scale-105">
                 <div class="w-12 h-12 bg-[#b84a39]/10 rounded-full flex items-center justify-center">
                   <i data-lucide="layout" class="w-6 h-6 text-[#b84a39]" stroke-width="2"></i>
                 </div>
@@ -341,7 +341,7 @@
               </div>
 
               <!-- Large Backend Box -->
-              <div class="flex flex-col items-center gap-3 bg-white dark:bg-neutral-800 border-2 border-neutral-200 dark:border-neutral-700 p-6 rounded-lg shadow-md text-center w-52 transition-all hover:scale-105">
+              <div class="flex flex-col items-center gap-3 bg-white dark:bg-neutral-800 border-2 border-neutral-300 dark:border-neutral-500 p-6 rounded-lg shadow-md text-center w-52 transition-all hover:scale-105">
                 <div class="w-12 h-12 bg-purple-500/10 rounded-full flex items-center justify-center">
                   <i data-lucide="cpu" class="w-6 h-6 text-purple-500" stroke-width="2"></i>
                 </div>
@@ -394,7 +394,7 @@
               
               <!-- Step 1: Client -->
               <div class="flex flex-col items-center gap-3 text-center w-36 md:w-44 transition-all hover:scale-105">
-                <div class="w-14 h-14 rounded-full bg-white dark:bg-neutral-800 border-2 border-neutral-200 dark:border-neutral-700 flex items-center justify-center relative shadow-md transition-all">
+                <div class="w-14 h-14 rounded-full bg-white dark:bg-neutral-800 border-2 border-neutral-300 dark:border-neutral-500 flex items-center justify-center relative shadow-md transition-all">
                   <i data-lucide="app-window" class="w-6 h-6 text-neutral-600 dark:text-neutral-400"></i>
                   <span class="absolute -top-1.5 -right-1.5 px-2 py-0.5 bg-[#b84a39] rounded-full border-2 border-white dark:border-neutral-900 text-[8px] text-white font-bold animate-pulse">REQ</span>
                 </div>
@@ -420,8 +420,8 @@
 
               <!-- Step 2: Gateway -->
               <div class="flex flex-col items-center gap-3 text-center w-36 md:w-44 transition-all hover:scale-105">
-                <div class="w-14 h-14 rounded-full bg-white dark:bg-neutral-800 border-2 border-neutral-200 dark:border-neutral-700 flex items-center justify-center shadow-md transition-all">
-                  <i data-lucide="arrow-left-right" class="w-6 h-6 text-[#b84a39]"></i>
+                <div class="w-14 h-14 rounded-full bg-white dark:bg-neutral-800 border-2 border-neutral-300 dark:border-neutral-500 flex items-center justify-center shadow-md transition-all">
+                  <i data-lucide="arrow-left-right" class="w-6 h-6 diagram-accent"></i>
                 </div>
                 <div>
                   <span class="text-base md:text-lg font-bold diagram-title">API Gateway</span>
@@ -435,14 +435,16 @@
                   <svg class="w-full h-2" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <line x1="0" y1="4" x2="100%" y2="4" stroke="var(--color-accent)" stroke-width="2.5" class="animate-flow" />
                   </svg>
-                  <i data-lucide="arrow-left-right" class="w-4 h-4 absolute right-0 diagram-subtitle"></i>
+                  <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2 py-0.5 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-500 rounded-full flex items-center justify-center shadow-sm z-10">
+                    <i data-lucide="arrow-left-right" class="w-3.5 h-3.5 diagram-accent"></i>
+                  </div>
                 </div>
                 <span class="text-base md:text-lg font-mono mt-2 text-center diagram-subtitle">HTTPS REST API</span>
               </div>
 
               <!-- Step 3: Cloud Gemini -->
               <div class="flex flex-col items-center gap-3 text-center w-36 md:w-48 transition-all hover:scale-105">
-                <div class="w-14 h-14 rounded-full bg-purple-900/10 dark:bg-purple-950/30 border-2 border-purple-500/30 dark:border-purple-500/20 flex items-center justify-center relative shadow-md transition-all">
+                <div class="w-14 h-14 rounded-full bg-purple-900/10 dark:bg-purple-950/30 border-2 border-purple-500/40 dark:border-purple-400/60 flex items-center justify-center relative shadow-md transition-all">
                   <i data-lucide="sparkles" class="w-6 h-6 text-[#b84a39]"></i>
                   <span class="absolute -top-1.5 -right-1.5 px-2 py-0.5 bg-green-500 rounded-full border-2 border-white dark:border-neutral-900 text-[8px] text-white font-bold animate-pulse">RES</span>
                 </div>
@@ -812,6 +814,8 @@
     // --- Theme Toggle System ---
     const themeToggleBtn = document.getElementById("theme-toggle-btn");
     const themeToggleText = document.getElementById("theme-toggle-text");
+    const sunIcon = document.getElementById("theme-icon-sun");
+    const moonIcon = document.getElementById("theme-icon-moon");
     
     // Check local storage theme settings on load
     if (localStorage.getItem("theme") === "light") {
@@ -832,12 +836,20 @@
       document.body.classList.add("dark");
       themeToggleText.textContent = "Dark";
       localStorage.setItem("theme", "dark");
+      if (sunIcon && moonIcon) {
+        sunIcon.classList.add("hidden");
+        moonIcon.classList.remove("hidden");
+      }
     }
 
     function disableDarkMode() {
       document.body.classList.remove("dark");
       themeToggleText.textContent = "Light";
       localStorage.setItem("theme", "light");
+      if (sunIcon && moonIcon) {
+        sunIcon.classList.remove("hidden");
+        moonIcon.classList.add("hidden");
+      }
     }
 
     // Initialize all Lucide Icons once
