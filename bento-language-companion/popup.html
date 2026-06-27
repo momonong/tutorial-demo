@@ -28,11 +28,13 @@
       <!-- Card 2: API Connection -->
       <section class="bento-card card-api">
         <div class="card-meta">01. AI Engine</div>
-        <h2 class="section-title">Gemini API</h2>
-        <div class="api-status-group">
-          <span class="status-dot" id="api-status-dot"></span>
-          <span class="status-text" id="api-status-text">Disconnected</span>
-        </div>
+        <h2 class="section-title flex-title">
+          <span>Gemini API</span>
+          <div class="api-status-group">
+            <span class="status-dot" id="api-status-dot"></span>
+            <span class="status-text" id="api-status-text">Disconnected</span>
+          </div>
+        </h2>
         <div class="api-input-wrapper">
           <input type="password" id="api-key-input" placeholder="Enter API Key..." autocomplete="off">
           <button class="icon-btn" id="toggle-key-visibility" title="Toggle visibility">
@@ -47,8 +49,8 @@
         <div class="card-meta">02. Daily Inspiration</div>
         <h2 class="section-title">Daily Lexeme</h2>
         <div class="lexeme-content">
-          <div class="lexeme-word" id="daily-word">Flâneur</div>
-          <div class="lexeme-details">
+          <div class="lexeme-header">
+            <span class="lexeme-word" id="daily-word">Flâneur</span>
             <span class="lexeme-pos" id="daily-pos">noun [French]</span>
             <span class="lexeme-ipa" id="daily-ipa">/flɑˈnœʁ/</span>
           </div>

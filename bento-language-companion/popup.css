@@ -32,7 +32,7 @@ body {
   background-color: var(--bg-app);
   color: var(--text-primary);
   width: 720px;
-  height: 580px;
+  height: 600px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -51,7 +51,7 @@ body {
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 105px 210px 200px;
+  grid-template-rows: 100px 230px 210px;
   gap: 12px;
   width: 100%;
   height: 100%;
@@ -61,7 +61,7 @@ body {
 .bento-card {
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
-  padding: 12px 14px;
+  padding: 10px 12px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -76,12 +76,12 @@ body {
 
 /* Card Meta (Swiss labels, upper-case, small) */
 .card-meta, .card-meta-row {
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .card-meta-row {
@@ -93,13 +93,19 @@ body {
 
 .section-title {
   font-family: var(--font-serif);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--text-primary);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   border-bottom: 1px solid var(--border-secondary);
-  padding-bottom: 4px;
+  padding-bottom: 3px;
+}
+
+.flex-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Card 1: Branding Details */
@@ -247,19 +253,22 @@ body {
   color: var(--accent-color);
 }
 
-.lexeme-details {
-  font-size: 9px;
-  color: var(--text-muted);
-  margin-bottom: 4px;
+.lexeme-header {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 2px;
 }
 
 .lexeme-pos {
+  font-size: 8px;
+  color: var(--text-muted);
   font-style: italic;
 }
 
 .lexeme-ipa {
-  margin-left: 4px;
-  font-family: var(--font-sans);
+  font-size: 8px;
+  color: var(--text-muted);
 }
 
 .lexeme-definition {
@@ -282,7 +291,7 @@ body {
 .form-row {
   display: flex;
   gap: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   align-items: center;
 }
 
@@ -354,7 +363,7 @@ body {
   overflow-y: auto;
   font-size: 11px;
   line-height: 1.4;
-  height: 120px;
+  height: 130px;
 }
 
 .output-placeholder {
@@ -529,8 +538,8 @@ body {
   display: flex;
   gap: 10px;
   flex-grow: 1;
-  height: 110px;
-  margin-top: 6px;
+  height: 100px;
+  margin-top: 4px;
 }
 
 .text-area-box {
