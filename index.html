@@ -44,97 +44,74 @@
   </script>
 
   <style>
-    :root {
-      /* Default: Dark mode values */
-      --bg-body: #0a0a0a;
-      --bg-radial-start: #18181b;
-      --bg-radial-end: #0a0a0a;
-      --bg-main: #0f0f11;
-      --bg-card: rgba(20, 20, 20, 0.7);
-      --border-color: #262626;
-      --border-main: #262626;
-      --shadow-color: #16161e;
-      --text-primary: #ffffff;
-      --text-secondary: #a3a3a3;
-      --text-muted: #525252;
-      --accent-color: #c084fc; /* electric purple */
-      --accent-bg: #a855f7;
-      --accent-hover: #c084fc;
+    /* Light Mode - Premium Swiss Typography */
+    body:not(.dark) {
+      --color-bg: #fbfbfb;
+      --color-card: #ffffff;
+      --color-border: #e5e5e5;
+      --color-text-primary: #111111;
+      --color-text-muted: #404040;
+      --color-accent: #6d28d9;
+      --accent-shadow: rgba(109, 40, 217, 0.15);
+      --btn-bg: #ffffff;
+      --btn-text: #111111;
+      --code-bg: #f5f5f5;
+      --kbd-bg: #e5e5e5;
+      --kbd-border: #d4d4d4;
+      --kbd-text: #111111;
+    }
+    
+    /* Dark Mode - Premium Tech Aesthetic */
+    body.dark {
+      --color-bg: #0a0a0a;
+      --color-card: #141414;
+      --color-border: #262626;
+      --color-text-primary: #ffffff;
+      --color-text-muted: #a3a3a3;
+      --color-accent: #a855f7;
       --accent-shadow: rgba(168, 85, 247, 0.4);
       --btn-bg: #161616;
-      --btn-text: #e5e5e5;
+      --btn-text: #ffffff;
       --code-bg: #1e1e1e;
       --kbd-bg: #262626;
       --kbd-border: #404040;
       --kbd-text: #d4d4d4;
-      --bg-diagram: rgba(10, 10, 12, 0.4);
-      --border-diagram: #262626;
-    }
-
-    body.light-mode {
-      /* Light mode values (Swiss Minimalist) */
-      --bg-body: #f3f4f6; 
-      --bg-radial-start: #ffffff;
-      --bg-radial-end: #e5e7eb;
-      --bg-main: #fbfbfb; /* crisp paper white */
-      --bg-card: rgba(255, 255, 255, 0.85); /* clean white cards */
-      --border-color: #e5e5e5; /* soft light-gray borders */
-      --border-main: #d1d5db;
-      --shadow-color: rgba(0, 0, 0, 0.05);
-      --text-primary: #1a1a1a; /* deep charcoal text */
-      --text-secondary: #4b5563; /* charcoal secondary */
-      --text-muted: #9ca3af;
-      --accent-color: #4f46e5; /* deep indigo */
-      --accent-bg: #6366f1; /* rich violet */
-      --accent-hover: #4f46e5;
-      --accent-shadow: rgba(99, 102, 241, 0.15);
-      --btn-bg: #f9fafb;
-      --btn-text: #374151;
-      --code-bg: #f3f4f6;
-      --kbd-bg: #e5e7eb;
-      --kbd-border: #d1d5db;
-      --kbd-text: #374151;
-      --bg-diagram: rgba(243, 244, 246, 0.5);
-      --border-diagram: #e5e5e5;
     }
 
     /* Premium dark/light tech radial gradient background */
     body {
-      background-color: var(--bg-body) !important;
-      background-image: radial-gradient(circle at center, var(--bg-radial-start) 0%, var(--bg-radial-end) 100%) !important;
-      color: var(--text-primary) !important;
-      transition: background-color 0.3s ease, background-image 0.3s ease, color 0.3s ease;
-    }
-    body.light-mode {
-      background-image: none !important;
+      background-color: var(--color-bg) !important;
+      color: var(--color-text-primary) !important;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
     
     /* Main slide deck frame overrides */
     main {
-      background-color: var(--bg-main) !important;
-      border-color: var(--border-main) !important;
-      box-shadow: 8px 8px 0px var(--shadow-color) !important;
+      background-color: var(--color-bg) !important;
+      border: 1px solid var(--color-border) !important;
+      box-shadow: 8px 8px 0px var(--color-border) !important;
       transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .slide-transition {
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
+    
     /* Dynamic Glassmorphism cards with fine dark/light borders & neon accent hover shadows */
     .bg-white, .bento-card {
-      background-color: var(--bg-card) !important;
+      background-color: var(--color-card) !important;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--border-color) !important;
-      box-shadow: 2px 2px 0px var(--shadow-color) !important;
-      color: var(--text-primary) !important;
+      border: 1px solid var(--color-border) !important;
+      box-shadow: 2px 2px 0px var(--color-border) !important;
+      color: var(--color-text-primary) !important;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     
     /* Diagram wrapper background and borders */
     .diagram-wrapper {
-      background-color: var(--bg-diagram) !important;
-      border: 1px dashed var(--border-diagram) !important;
+      background-color: var(--color-card) !important;
+      border: 1px dashed var(--color-border) !important;
       transition: all 0.2s ease-in-out;
     }
     
@@ -145,24 +122,27 @@
     .animate-flow {
       stroke-dasharray: 6, 4;
       animation: flow 1s linear infinite;
+      stroke: var(--color-accent) !important;
     }
+    
     .bg-white:hover, .bento-card:hover {
-      border-color: var(--accent-bg) !important; 
+      border-color: var(--color-accent) !important; 
       box-shadow: 0 0 15px var(--accent-shadow) !important;
       transform: translateY(-2px);
     }
+    
     /* Map inline custom colors to cyber neon / indigo accents */
     .text-\[\#b84a39\] {
-      color: var(--accent-color) !important;
+      color: var(--color-accent) !important;
     }
     .bg-\[\#b84a39\] {
-      background-color: var(--accent-bg) !important;
+      background-color: var(--color-accent) !important;
       box-shadow: 0 0 10px var(--accent-shadow);
     }
     .text-red-600 {
       color: #f87171 !important; /* Soft error red */
     }
-    body.light-mode .text-red-600 {
+    body:not(.dark) .text-red-600 {
       color: #dc2626 !important; /* Legible red for light mode */
     }
     .bg-neutral-100 {
@@ -171,38 +151,38 @@
     
     /* Premium theme controllers */
     .btn-control {
-      border: 1px solid var(--border-color) !important;
+      border: 1px solid var(--color-border) !important;
       background-color: var(--btn-bg) !important;
       color: var(--btn-text) !important;
-      box-shadow: 2px 2px 0px var(--shadow-color) !important;
+      box-shadow: 2px 2px 0px var(--color-border) !important;
       transition: all 0.2s ease;
     }
     .btn-control:hover:not(:disabled) {
-      border-color: var(--accent-bg) !important;
-      color: var(--accent-color) !important;
-      box-shadow: 2px 2px 0px var(--accent-bg) !important;
+      border-color: var(--color-accent) !important;
+      color: var(--color-accent) !important;
+      box-shadow: 2px 2px 0px var(--color-accent) !important;
     }
     .btn-control:disabled {
       opacity: 0.2;
     }
     .btn-primary {
-      background-color: var(--accent-bg) !important;
+      background-color: var(--color-accent) !important;
       color: #ffffff !important;
-      border-color: var(--accent-bg) !important;
+      border-color: var(--color-accent) !important;
     }
     .btn-primary:hover:not(:disabled) {
-      background-color: var(--bg-main) !important;
-      color: var(--accent-color) !important;
-      border-color: var(--accent-bg) !important;
+      background-color: var(--color-bg) !important;
+      color: var(--color-accent) !important;
+      border-color: var(--color-accent) !important;
     }
 
     #theme-toggle-btn {
-      border-color: var(--border-color) !important;
-      color: var(--text-secondary) !important;
+      border-color: var(--color-border) !important;
+      color: var(--color-text-muted) !important;
     }
     #theme-toggle-btn:hover {
-      color: var(--accent-color) !important;
-      border-color: var(--accent-bg) !important;
+      color: var(--color-accent) !important;
+      border-color: var(--color-accent) !important;
     }
 
     kbd {
@@ -211,18 +191,32 @@
       color: var(--kbd-text) !important;
     }
     #export-pptx-btn {
-      background-color: var(--bg-card) !important;
-      border-color: var(--border-color) !important;
-      color: var(--text-primary) !important;
+      background-color: var(--color-card) !important;
+      border-color: var(--color-border) !important;
+      color: var(--color-text-primary) !important;
     }
     #export-pptx-btn:hover {
-      border-color: var(--accent-bg) !important;
-      color: var(--accent-color) !important;
-      box-shadow: 0px 0px 12px var(--accent-shadow) !important;
+      border-color: var(--color-accent) !important;
+      color: var(--color-accent) !important;
+    }
+
+    /* Diagram helper classes */
+    .diagram-title {
+      color: var(--color-text-primary) !important;
+      font-weight: 700 !important;
+      transition: color 0.3s ease;
+    }
+    .diagram-subtitle {
+      color: var(--color-text-muted) !important;
+      transition: color 0.3s ease;
+    }
+    .diagram-accent {
+      color: var(--color-accent) !important;
+      transition: color 0.3s ease;
     }
   </style>
 </head>
-<body class="min-h-screen w-screen flex flex-col items-center justify-center p-4 md:p-8 font-sans text-neutral-900 select-none overflow-x-hidden">
+<body class="dark min-h-screen w-screen flex flex-col items-center justify-center p-4 md:p-8 font-sans select-none overflow-x-hidden">
 
   <!-- Main Presentation Container (Dynamic responsive scaling to maximize screen) -->
   <main class="w-full max-w-[95vw] 2xl:max-w-[88vw] h-[85vh] min-h-[750px] max-h-[1000px] bg-[#0f0f11] border-2 border-[#262626] shadow-[8px_8px_0px_#16161e] flex flex-col justify-between p-8 md:p-10 pb-6 md:pb-8 relative overflow-hidden">
@@ -313,11 +307,10 @@
               </p>
             </div>
           </div>
-
           <!-- Right Column (lg:col-span-8): GIANT Architectural Flow Chart -->
           <div class="lg:col-span-8 bg-white border border-black p-8 md:p-12 shadow-[4px_4px_0px_#000] hover:shadow-[6px_6px_0px_#000] transition-all flex flex-col justify-center items-center relative min-h-[360px] md:min-h-[400px]">
             <i data-lucide="help-circle" class="w-8 h-8 text-neutral-400 absolute top-6 right-6" stroke-width="1.5"></i>
-            <span class="text-xl md:text-2xl font-bold tracking-widest text-neutral-950 dark:text-neutral-50 uppercase mb-8 self-start transition-colors">Extension Communication Architecture</span>
+            <span class="text-xl md:text-2xl font-bold tracking-widest uppercase mb-8 self-start transition-colors diagram-title">Extension Communication Architecture</span>
             
             <!-- Large flow container -->
             <div class="w-full flex flex-col sm:flex-row items-center justify-around gap-6 diagram-wrapper p-8 rounded-xl transition-all">
@@ -328,21 +321,21 @@
                   <i data-lucide="layout" class="w-6 h-6 text-[#b84a39]" stroke-width="2"></i>
                 </div>
                 <div>
-                  <span class="text-base md:text-lg font-bold text-neutral-900 dark:text-white">UI Stage (Popup)</span>
-                  <p class="text-base md:text-lg text-neutral-800 dark:text-neutral-200 font-mono mt-1">popup.html + popup.js</p>
+                  <span class="text-base md:text-lg font-bold diagram-title">UI Stage (Popup)</span>
+                  <p class="text-base md:text-lg font-mono mt-1 diagram-subtitle">popup.html + popup.js</p>
                 </div>
               </div>
 
               <!-- Connector arrow with SVG flow animation -->
               <div class="flex-grow flex flex-col items-center mx-2 relative min-w-[120px] w-full">
-                <span class="text-[10px] md:text-xs font-bold tracking-wider text-[#b84a39] dark:text-[#c084fc] uppercase text-center mb-2">Message Passing</span>
+                <span class="text-[10px] md:text-xs font-bold tracking-wider uppercase text-center mb-2 diagram-accent">Message Passing</span>
                 <div class="w-full flex items-center justify-center relative h-6">
                   <svg class="w-full h-2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <line x1="0" y1="4" x2="100%" y2="4" stroke="var(--accent-bg)" stroke-width="2.5" class="animate-flow" />
+                    <line x1="0" y1="4" x2="100%" y2="4" stroke="var(--color-accent)" stroke-width="2.5" class="animate-flow" />
                   </svg>
-                  <i data-lucide="arrow-right" class="w-4 h-4 text-[#b84a39] dark:text-[#c084fc] absolute right-0"></i>
+                  <i data-lucide="arrow-right" class="w-4 h-4 absolute right-0 diagram-accent"></i>
                 </div>
-                <span class="text-base md:text-lg text-neutral-800 dark:text-neutral-200 font-mono mt-2 text-center">chrome.runtime.sendMessage</span>
+                <span class="text-base md:text-lg font-mono mt-2 text-center diagram-subtitle">chrome.runtime.sendMessage</span>
               </div>
 
               <!-- Large Backend Box -->
@@ -351,11 +344,10 @@
                   <i data-lucide="cpu" class="w-6 h-6 text-purple-500" stroke-width="2"></i>
                 </div>
                 <div>
-                  <span class="text-base md:text-lg font-bold text-neutral-900 dark:text-white">Engine Worker</span>
-                  <p class="text-base md:text-lg text-neutral-800 dark:text-neutral-200 font-mono mt-1">background.js (Service)</p>
+                  <span class="text-base md:text-lg font-bold diagram-title">Engine Worker</span>
+                  <p class="text-base md:text-lg font-mono mt-1 diagram-subtitle">background.js (Service)</p>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
@@ -390,11 +382,10 @@
               "Think of the API as a waiter taking your selection to the kitchen (Gemini) and carrying the response plate back to your table."
             </div>
           </div>
-
           <!-- Right Column (lg:col-span-8): GIANT Horizontal Interactive Pipeline -->
           <div class="lg:col-span-8 bg-white border border-black p-8 md:p-12 shadow-[4px_4px_0px_#000] hover:shadow-[6px_6px_0px_#000] transition-all flex flex-col justify-center items-center relative min-h-[360px] md:min-h-[400px]">
             <i data-lucide="key" class="w-8 h-8 text-neutral-400 absolute top-6 right-6" stroke-width="1.5"></i>
-            <span class="text-xl md:text-2xl font-bold tracking-widest text-neutral-950 dark:text-neutral-50 uppercase mb-8 self-start transition-colors">Request-Response Authentication Pipeline</span>
+            <span class="text-xl md:text-2xl font-bold tracking-widest uppercase mb-8 self-start transition-colors diagram-title">Request-Response Authentication Pipeline</span>
             
             <!-- Large pipe container -->
             <div class="w-full flex items-center justify-between diagram-wrapper p-6 md:p-8 rounded-xl transition-all gap-2">
@@ -406,8 +397,8 @@
                   <span class="absolute -top-1.5 -right-1.5 px-2 py-0.5 bg-[#b84a39] rounded-full border-2 border-white dark:border-neutral-900 text-[8px] text-white font-bold animate-pulse">REQ</span>
                 </div>
                 <div>
-                  <span class="text-base md:text-lg font-bold text-neutral-900 dark:text-white">Extension Engine</span>
-                  <p class="text-base md:text-lg text-neutral-800 dark:text-neutral-200 font-mono mt-0.5">Local Scope</p>
+                  <span class="text-base md:text-lg font-bold diagram-title">Extension Engine</span>
+                  <p class="text-base md:text-lg font-mono mt-0.5 diagram-subtitle">Local Scope</p>
                 </div>
               </div>
 
@@ -415,14 +406,14 @@
               <div class="flex-grow flex flex-col items-center relative mx-1 min-w-[90px]">
                 <div class="w-full flex items-center justify-center relative h-6">
                   <svg class="w-full h-2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <line x1="0" y1="4" x2="100%" y2="4" stroke="var(--accent-bg)" stroke-width="2.5" class="animate-flow" />
+                    <line x1="0" y1="4" x2="100%" y2="4" stroke="var(--color-accent)" stroke-width="2.5" class="animate-flow" />
                   </svg>
                   <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2.5 py-1 bg-purple-100 dark:bg-purple-950/80 border-2 border-purple-300 dark:border-purple-800 rounded-full flex items-center gap-1.5 shadow-md z-10 transition-all hover:scale-110">
                     <i data-lucide="key" class="w-3.5 h-3.5 text-purple-600 dark:text-purple-400"></i>
                     <span class="text-xs font-bold font-mono text-purple-600 dark:text-purple-400 uppercase tracking-widest">API Key</span>
                   </div>
                 </div>
-                <span class="text-base md:text-lg text-neutral-800 dark:text-neutral-200 font-mono mt-2 text-center">Bearer Authentication</span>
+                <span class="text-base md:text-lg font-mono mt-2 text-center diagram-subtitle">Bearer Authentication</span>
               </div>
 
               <!-- Step 2: Gateway -->
@@ -431,8 +422,8 @@
                   <i data-lucide="arrow-left-right" class="w-6 h-6 text-[#b84a39]"></i>
                 </div>
                 <div>
-                  <span class="text-base md:text-lg font-bold text-neutral-900 dark:text-white">API Gateway</span>
-                  <p class="text-base md:text-lg text-neutral-800 dark:text-neutral-200 font-mono mt-0.5">The Waiter</p>
+                  <span class="text-base md:text-lg font-bold diagram-title">API Gateway</span>
+                  <p class="text-base md:text-lg font-mono mt-0.5 diagram-subtitle">The Waiter</p>
                 </div>
               </div>
 
@@ -440,11 +431,11 @@
               <div class="flex-grow flex flex-col items-center relative mx-1 min-w-[90px]">
                 <div class="w-full flex items-center justify-center relative h-6">
                   <svg class="w-full h-2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <line x1="0" y1="4" x2="100%" y2="4" stroke="var(--accent-bg)" stroke-width="2.5" class="animate-flow" />
+                    <line x1="0" y1="4" x2="100%" y2="4" stroke="var(--color-accent)" stroke-width="2.5" class="animate-flow" />
                   </svg>
-                  <i data-lucide="arrow-left-right" class="w-4 h-4 text-neutral-500 dark:text-neutral-400 absolute right-0"></i>
+                  <i data-lucide="arrow-left-right" class="w-4 h-4 absolute right-0 diagram-subtitle"></i>
                 </div>
-                <span class="text-base md:text-lg text-neutral-850 dark:text-neutral-150 font-mono mt-2 text-center">HTTPS REST API</span>
+                <span class="text-base md:text-lg font-mono mt-2 text-center diagram-subtitle">HTTPS REST API</span>
               </div>
 
               <!-- Step 3: Cloud Gemini -->
@@ -454,11 +445,10 @@
                   <span class="absolute -top-1.5 -right-1.5 px-2 py-0.5 bg-green-500 rounded-full border-2 border-white dark:border-neutral-900 text-[8px] text-white font-bold animate-pulse">RES</span>
                 </div>
                 <div>
-                  <span class="text-base md:text-lg font-bold text-neutral-900 dark:text-white">Gemini Cloud</span>
-                  <p class="text-base md:text-lg text-neutral-850 dark:text-neutral-150 font-mono mt-0.5">Large Language Model</p>
+                  <span class="text-base md:text-lg font-bold diagram-title">Gemini Cloud</span>
+                  <p class="text-base md:text-lg font-mono mt-0.5 diagram-subtitle">Large Language Model</p>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
@@ -824,32 +814,32 @@
     
     // Check local storage theme settings on load
     if (localStorage.getItem("theme") === "light") {
-      enableLightMode();
+      disableDarkMode();
     } else {
-      lucide.createIcons();
+      enableDarkMode();
     }
 
     themeToggleBtn.addEventListener("click", () => {
-      if (document.body.classList.contains("light-mode")) {
-        disableLightMode();
+      if (document.body.classList.contains("dark")) {
+        disableDarkMode();
       } else {
-        enableLightMode();
+        enableDarkMode();
       }
     });
 
-    function enableLightMode() {
-      document.body.classList.add("light-mode");
-      themeToggleIcon.textContent = "☀️";
-      themeToggleText.textContent = "Light";
-      localStorage.setItem("theme", "light");
-      lucide.createIcons();
-    }
-
-    function disableLightMode() {
-      document.body.classList.remove("light-mode");
+    function enableDarkMode() {
+      document.body.classList.add("dark");
       themeToggleIcon.textContent = "🌙";
       themeToggleText.textContent = "Dark";
       localStorage.setItem("theme", "dark");
+      lucide.createIcons();
+    }
+
+    function disableDarkMode() {
+      document.body.classList.remove("dark");
+      themeToggleIcon.textContent = "☀️";
+      themeToggleText.textContent = "Light";
+      localStorage.setItem("theme", "light");
       lucide.createIcons();
     }
   </script>
