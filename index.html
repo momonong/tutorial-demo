@@ -67,6 +67,8 @@
       --kbd-bg: #262626;
       --kbd-border: #404040;
       --kbd-text: #d4d4d4;
+      --bg-diagram: rgba(10, 10, 12, 0.4);
+      --border-diagram: #262626;
     }
 
     body.light-mode {
@@ -92,6 +94,8 @@
       --kbd-bg: #e5e7eb;
       --kbd-border: #d1d5db;
       --kbd-text: #374151;
+      --bg-diagram: rgba(243, 244, 246, 0.5);
+      --border-diagram: #e5e5e5;
     }
 
     /* Premium dark/light tech radial gradient background */
@@ -125,6 +129,13 @@
       box-shadow: 2px 2px 0px var(--shadow-color) !important;
       color: var(--text-primary) !important;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    /* Diagram wrapper background and borders */
+    .diagram-wrapper {
+      background-color: var(--bg-diagram) !important;
+      border: 1px dashed var(--border-diagram) !important;
+      transition: all 0.2s ease-in-out;
     }
     .bg-white:hover, .bento-card:hover {
       border-color: var(--accent-bg) !important; 
@@ -297,10 +308,10 @@
           <!-- Right Column (lg:col-span-8): GIANT Architectural Flow Chart -->
           <div class="lg:col-span-8 bg-white border border-black p-8 md:p-12 shadow-[4px_4px_0px_#000] hover:shadow-[6px_6px_0px_#000] transition-all flex flex-col justify-center items-center relative min-h-[360px] md:min-h-[400px]">
             <i data-lucide="help-circle" class="w-8 h-8 text-neutral-400 absolute top-6 right-6" stroke-width="1.5"></i>
-            <span class="text-xs md:text-sm font-bold tracking-widest text-neutral-400 uppercase mb-8 self-start">Extension Communication Architecture</span>
+            <span class="text-xl md:text-2xl font-bold tracking-widest text-neutral-800 dark:text-neutral-200 uppercase mb-8 self-start transition-colors">Extension Communication Architecture</span>
             
             <!-- Large flow container -->
-            <div class="w-full flex flex-col sm:flex-row items-center justify-around gap-6 bg-neutral-50/50 dark:bg-neutral-900/50 border border-dashed border-neutral-200 dark:border-neutral-800 p-8 rounded-xl transition-all">
+            <div class="w-full flex flex-col sm:flex-row items-center justify-around gap-6 diagram-wrapper p-8 rounded-xl transition-all">
               
               <!-- Large Frontend Box -->
               <div class="flex flex-col items-center gap-3 bg-white dark:bg-neutral-800 border-2 border-neutral-200 dark:border-neutral-700 p-6 rounded-lg shadow-md text-center w-48 transition-all hover:scale-105">
@@ -374,10 +385,10 @@
           <!-- Right Column (lg:col-span-8): GIANT Horizontal Interactive Pipeline -->
           <div class="lg:col-span-8 bg-white border border-black p-8 md:p-12 shadow-[4px_4px_0px_#000] hover:shadow-[6px_6px_0px_#000] transition-all flex flex-col justify-center items-center relative min-h-[360px] md:min-h-[400px]">
             <i data-lucide="key" class="w-8 h-8 text-neutral-400 absolute top-6 right-6" stroke-width="1.5"></i>
-            <span class="text-xs md:text-sm font-bold tracking-widest text-neutral-400 uppercase mb-8 self-start">Request-Response Authentication Pipeline</span>
+            <span class="text-xl md:text-2xl font-bold tracking-widest text-neutral-800 dark:text-neutral-200 uppercase mb-8 self-start transition-colors">Request-Response Authentication Pipeline</span>
             
             <!-- Large pipe container -->
-            <div class="w-full flex items-center justify-between bg-neutral-50/50 dark:bg-neutral-900/50 border border-dashed border-neutral-200 dark:border-neutral-800 p-6 md:p-8 rounded-xl transition-all gap-2">
+            <div class="w-full flex items-center justify-between diagram-wrapper p-6 md:p-8 rounded-xl transition-all gap-2">
               
               <!-- Step 1: Client -->
               <div class="flex flex-col items-center gap-3 text-center w-28 md:w-32 transition-all hover:scale-105">
@@ -618,66 +629,6 @@
     // --- PowerPoint Export System ---
     document.getElementById("export-pptx-btn").addEventListener("click", exportPresentationToPPTX);
 
-    function parseSlideCards(slideId) {
-      if (slideId === 'slide-2') {
-        return {
-          chapter: "Chapter 01",
-          title: "Extension Anatomy 101",
-          cards: [
-            { category: "The Stage", title: "The Frontend", body: "Your popup.html and interactive modules. What users see, select, click, and touch." },
-            { category: "The Backstage", title: "The Backend", body: "Your Background Service Worker (background.js). The invisible, event-driven logical core." },
-            { category: "The Paradox", title: "Static code is boring.", body: "Without a language model, our extension is just a passive form. How do we give our extension a real, dynamic linguistic brain?" }
-          ]
-        };
-      }
-      if (slideId === 'slide-3') {
-        return {
-          chapter: "Chapter 02",
-          title: "The Missing Link — What is an API?",
-          cards: [
-            { category: "Messenger", title: "API: Application Programming Interface", body: "The structured digital protocol connecting your client browser with remote computational resources." },
-            { category: "Analogy", title: "The Waiter Metaphor", body: "Think of it as a waiter taking your text request from the browser to a massive AI model in the cloud, and delivering back the parsed translation plate." },
-            { category: "Credentials", title: "Access Key Passport", body: "To unlock it, you just need a digital passport: The API Key. It authenticates your requests and grants you access to cloud-based intelligence." }
-          ]
-        };
-      }
-
-      const slideDiv = document.getElementById(slideId);
-      if (!slideDiv) return null;
-      
-      const headerEl = slideDiv.querySelector('h2');
-      const chapterEl = slideDiv.querySelector('span');
-      
-      const chapter = chapterEl ? chapterEl.textContent.trim() : "";
-      const title = headerEl ? headerEl.textContent.trim() : "";
-      
-      const grid = slideDiv.querySelector('.grid');
-      const cardEls = grid ? Array.from(grid.children) : [];
-      
-      const parsedCards = cardEls.map(card => {
-        const categoryEl = card.querySelector('span');
-        const category = categoryEl ? categoryEl.textContent.trim() : "";
-        
-        const h3El = card.querySelector('h3');
-        let cardTitle = h3El ? h3El.textContent.trim() : "";
-        
-        const pEl = card.querySelector('p, blockquote');
-        let cardBody = pEl ? pEl.textContent.trim() : "";
-        
-        if (!cardTitle && card.querySelector('strong')) {
-          cardTitle = card.querySelector('strong').textContent.trim();
-        }
-        
-        if (cardTitle && cardBody.startsWith(cardTitle)) {
-          cardBody = cardBody.replace(cardTitle, "").trim();
-        }
-        
-        return { category, title: cardTitle, body: cardBody };
-      });
-      
-      return { chapter, title, cards: parsedCards };
-    }
-
     function exportPresentationToPPTX() {
       try {
         let pptx = new PptxGenJS();
@@ -743,11 +694,46 @@
           fontSize: 15, fontFace: "Arial", color: "C084FC", bold: true 
         });
 
-        // Slides 2 to 5
-        for (let i = 2; i <= totalSlides; i++) {
-          const slideData = parseSlideCards(`slide-${i}`);
-          if (!slideData) continue;
-          
+        // Slides 2 to 5 Content Data Model
+        const slidesData = [
+          {
+            chapter: "Chapter 01",
+            title: "Extension Anatomy 101",
+            cards: [
+              { category: "The Stage", title: "The Frontend", body: "Your popup interface (popup.html). What users see, select, click, and interact with directly." },
+              { category: "The Backstage", title: "The Backend", body: "Background Service Worker (background.js). The event-driven logical engine managing state." },
+              { category: "The Paradox", title: "Static code is boring.", body: "Without a language model, our extension is just a passive form. How do we give our extension a real, dynamic linguistic brain?" }
+            ]
+          },
+          {
+            chapter: "Chapter 02",
+            title: "The Missing Link — What is an API?",
+            cards: [
+              { category: "Messenger", title: "API: Application Programming Interface", body: "API connects your extension client to secure cloud computation engines." },
+              { category: "Analogy", title: "The Waiter Metaphor", body: "Think of the API as a waiter taking your selection to the kitchen (Gemini) and carrying the response plate back to your table." },
+              { category: "Credentials", title: "Access Key Passport", body: "Your API Key acts as a digital passport. It authenticates your requests and unlocks large language model resources securely." }
+            ]
+          },
+          {
+            chapter: "Chapter 03",
+            title: "The Reality of Dev Life — Embracing Red Text",
+            cards: [
+              { category: "First Principles", title: "Rule #1: Console Output", body: '"Error codes (401 Unauthorized, 403 Forbidden) are not failures. They are navigational signs telling you exactly where the bridge fell."' },
+              { category: "Mental Shift", title: "Modern Debugging Mindset", body: "Never panic. When the extension fails or throws red warnings, do not guess: just copy-paste the raw red text directly into your AI assistant." }
+            ]
+          },
+          {
+            chapter: "Chapter 04",
+            title: "Live Hunt — Claiming Student Treasures",
+            cards: [
+              { category: "The Platform", title: "Google AI Studio", body: "Get generous, free Gemini API quotas using your university email address. No credit card required." },
+              { category: "Live Practice", title: "Demo Walkthrough", body: '"Let\'s intentionally run a broken extension, inspect the Chrome console, grab an API Key from Google AI Studio, and link it to bring its language-assistant brain to life."' }
+            ]
+          }
+        ];
+
+        // Loop and render slides
+        slidesData.forEach((slideData) => {
           let slide = pptx.addSlide();
           slide.background = { fill: "0A0A0A" };
           
@@ -810,7 +796,7 @@
               });
             }
           });
-        }
+        });
         
         // Trigger presentation download
         pptx.writeFile({ fileName: "Cracking_the_Extension_Code.pptx" });
