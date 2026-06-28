@@ -290,15 +290,21 @@
             
             <div class="space-y-4">
               <div class="border-l-4 border-[#b84a39] pl-4">
-                <h3 class="font-serif text-xl font-bold text-neutral-800">The Frontend (Stage)</h3>
+                <h3 class="font-serif text-xl font-bold text-neutral-800">UI Layer (Frontend)</h3>
                 <p class="text-sm md:text-base text-neutral-600 leading-relaxed mt-1">
                   Your popup interface (<code class="bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 font-mono text-xs">popup.html</code>). What users see, select, click, and interact with directly.
                 </p>
               </div>
-              <div class="border-l-4 border-neutral-400 pl-4">
-                <h3 class="font-serif text-xl font-bold text-neutral-800">The Backend (Backstage)</h3>
+              <div class="border-l-4 border-purple-400 pl-4">
+                <h3 class="font-serif text-xl font-bold text-neutral-800">Browser Engine (Orchestration)</h3>
                 <p class="text-sm md:text-base text-neutral-600 leading-relaxed mt-1">
-                  Background Service Worker (<code class="bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 font-mono text-xs">background.js</code>). The event-driven logical engine managing state.
+                  Service Worker (<code class="bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 font-mono text-xs">background.js</code>). Runs inside the browser — no UI, no DOM. Manages events, state, and relays calls to the cloud.
+                </p>
+              </div>
+              <div class="border-l-4 border-neutral-300 pl-4 opacity-60">
+                <h3 class="font-serif text-base font-bold text-neutral-500">True Backend → Chapter 02 ↓</h3>
+                <p class="text-sm text-neutral-400 leading-relaxed mt-1">
+                  The real computation lives on Google's servers — accessible only through an API Key.
                 </p>
               </div>
             </div>
@@ -340,13 +346,14 @@
                 <span class="text-base md:text-lg font-mono mt-2 text-center diagram-subtitle">chrome.runtime.sendMessage</span>
               </div>
 
-              <!-- Large Backend Box -->
-              <div class="flex flex-col items-center gap-3 bg-white dark:bg-neutral-800 border-2 border-neutral-300 dark:border-neutral-500 p-6 rounded-lg shadow-md text-center w-52 transition-all hover:scale-105">
+              <!-- Large Orchestration Box -->
+              <div class="flex flex-col items-center gap-3 bg-white dark:bg-neutral-800 border-2 border-purple-300 dark:border-purple-500 p-6 rounded-lg shadow-md text-center w-52 transition-all hover:scale-105">
                 <div class="w-12 h-12 bg-purple-500/10 rounded-full flex items-center justify-center">
                   <i data-lucide="cpu" class="w-6 h-6 text-purple-500" stroke-width="2"></i>
                 </div>
                 <div>
-                  <span class="text-base md:text-lg font-bold diagram-title">Engine Worker</span>
+                  <span class="text-base md:text-lg font-bold diagram-title">Browser Engine</span>
+                  <p class="text-[11px] font-semibold uppercase tracking-wider text-purple-400 mt-0.5">Orchestration Layer</p>
                   <p class="text-base md:text-lg font-mono mt-1 diagram-subtitle">background.js (Service)</p>
                 </div>
               </div>
@@ -706,7 +713,7 @@
             title: "Extension Anatomy 101",
             cards: [
               { category: "The Stage", title: "The Frontend", body: "Your popup interface (popup.html). What users see, select, click, and interact with directly." },
-              { category: "The Backstage", title: "The Backend", body: "Background Service Worker (background.js). The event-driven logical engine managing state." },
+              { category: "The Backstage", title: "Browser Engine (Orchestration)", body: "Service Worker (background.js). Runs inside the browser — no UI, no DOM. Manages events, state, and relays calls to the cloud. Not a server!" },
               { category: "The Paradox", title: "Static code is boring.", body: "Without a language model, our extension is just a passive form. How do we give our extension a real, dynamic linguistic brain?" }
             ]
           },
