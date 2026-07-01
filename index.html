@@ -205,6 +205,9 @@
       color: var(--color-accent) !important;
       transition: color 0.3s ease;
     }
+    /* Hide scrollbar on slide viewport while keeping scroll functionality */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
   </style>
 </head>
 <body class="dark min-h-screen w-screen flex flex-col items-center justify-center p-4 md:p-8 font-sans select-none overflow-x-hidden">
@@ -229,7 +232,7 @@
     </header>
 
     <!-- Slide Viewport -->
-    <div class="flex-grow relative flex flex-col justify-center overflow-y-auto min-h-0">
+    <div class="flex-grow relative flex flex-col justify-center overflow-y-auto min-h-0 no-scrollbar">
 
       <!-- Slide 1: Title Slide -->
       <div class="slide slide-transition opacity-100 transform translate-x-0 flex flex-col justify-between h-full" id="slide-1">
