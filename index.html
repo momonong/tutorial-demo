@@ -528,6 +528,78 @@
         </div>
       </div>
 
+      <!-- Slide 6: What's Next? -->
+      <div class="slide slide-transition hidden opacity-0 transform translate-x-12 flex flex-col justify-between h-full" id="slide-6">
+        <div class="mb-6">
+          <span class="text-sm font-bold tracking-widest text-neutral-400 uppercase">Chapter 05</span>
+          <h2 class="font-serif text-3xl md:text-4xl font-bold mt-1 text-neutral-800">What's Next? — Your Developer Roadmap</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 flex-grow items-stretch my-auto">
+
+          <!-- Card 1: DevTools -->
+          <div class="bg-white border border-black px-8 py-6 flex flex-col justify-between shadow-[2px_2px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:-translate-y-0.5 transition-all min-h-[200px]">
+            <i data-lucide="monitor" class="w-8 h-8 text-neutral-400 absolute top-6 right-6" stroke-width="1.5"></i>
+            <div>
+              <span class="text-xs font-bold tracking-widest text-[#b84a39] uppercase">Step 01 · Inspect</span>
+              <h3 class="font-serif text-2xl md:text-3xl font-semibold mt-4 mb-3">Chrome DevTools</h3>
+              <p class="text-base md:text-lg text-neutral-600 leading-relaxed">
+                Right-click the extension popup → <strong>Inspect</strong>. The <span class="font-mono text-sm bg-neutral-100 px-1.5 py-0.5">Console</span> tab shows all errors and API responses in real time. Your first debugging superpower.
+              </p>
+            </div>
+            <div class="mt-4 font-mono text-xs text-neutral-400 border-t border-neutral-100 pt-3">
+              Right-click popup → Inspect → Console tab
+            </div>
+          </div>
+
+          <!-- Card 2: JSON -->
+          <div class="bg-white border border-black px-8 py-6 flex flex-col justify-between shadow-[2px_2px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:-translate-y-0.5 transition-all min-h-[200px]">
+            <i data-lucide="braces" class="w-8 h-8 text-neutral-400 absolute top-6 right-6" stroke-width="1.5"></i>
+            <div>
+              <span class="text-xs font-bold tracking-widest text-neutral-400 uppercase">Step 02 · Read</span>
+              <h3 class="font-serif text-2xl md:text-3xl font-semibold mt-4 mb-3">What is JSON?</h3>
+              <p class="text-base md:text-lg text-neutral-600 leading-relaxed">
+                Gemini's responses arrive as <strong>JSON</strong> — structured text that looks like a dictionary. Keys on the left, values on the right. Once you can read it, you can extract any piece of data you want.
+              </p>
+            </div>
+            <div class="mt-4 font-mono text-xs text-neutral-400 border-t border-neutral-100 pt-3">
+              { "translation": "flâneur", "ipa": "/flɑˈnœʁ/" }
+            </div>
+          </div>
+
+          <!-- Card 3: Edit Config -->
+          <div class="bg-white border border-black px-8 py-6 flex flex-col justify-between shadow-[2px_2px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:-translate-y-0.5 transition-all min-h-[200px]">
+            <i data-lucide="file-pen-line" class="w-8 h-8 text-neutral-400 absolute top-6 right-6" stroke-width="1.5"></i>
+            <div>
+              <span class="text-xs font-bold tracking-widest text-[#b84a39] uppercase">Step 03 · Modify</span>
+              <h3 class="font-serif text-2xl md:text-3xl font-semibold mt-4 mb-3">Editing the Model</h3>
+              <p class="text-base md:text-lg text-neutral-600 leading-relaxed">
+                Open <span class="font-mono text-sm bg-neutral-100 px-1.5 py-0.5">popup.js</span> in any text editor. Find the line <span class="font-mono text-sm bg-neutral-100 px-1.5 py-0.5">gemini-1.5-flash</span> and change it to a newer model name. Save. Reload the extension. Done.
+              </p>
+            </div>
+            <div class="mt-4 font-mono text-xs text-neutral-400 border-t border-neutral-100 pt-3">
+              popup.js → find model name → replace → reload
+            </div>
+          </div>
+
+          <!-- Card 4: Add Language -->
+          <div class="bg-white border border-black px-8 py-6 flex flex-col justify-between shadow-[2px_2px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:-translate-y-0.5 transition-all min-h-[200px]">
+            <i data-lucide="languages" class="w-8 h-8 text-neutral-400 absolute top-6 right-6" stroke-width="1.5"></i>
+            <div>
+              <span class="text-xs font-bold tracking-widest text-neutral-400 uppercase">Step 04 · Extend</span>
+              <h3 class="font-serif text-2xl md:text-3xl font-semibold mt-4 mb-3">Adding a Language</h3>
+              <p class="text-base md:text-lg text-neutral-600 leading-relaxed">
+                Open <span class="font-mono text-sm bg-neutral-100 px-1.5 py-0.5">popup.html</span>. Find the <span class="font-mono text-sm bg-neutral-100 px-1.5 py-0.5">&lt;select&gt;</span> dropdown. Add one line: <span class="font-mono text-sm bg-neutral-100 px-1.5 py-0.5">&lt;option value="Latin"&gt;to Latin&lt;/option&gt;</span>. Save. Reload. Latin is now an option.
+              </p>
+            </div>
+            <div class="mt-4 font-mono text-xs text-neutral-400 border-t border-neutral-100 pt-3">
+              popup.html → &lt;select&gt; → add &lt;option&gt; → reload
+            </div>
+          </div>
+
+        </div>
+      </div>
+
       <!-- Presentation Footer Controllers -->
       <footer class="flex justify-between items-center border-t border-[#262626] pt-4 mt-4 md:mt-6 pb-2 md:pb-4">
         <div class="text-xs md:text-sm font-semibold text-neutral-500 uppercase tracking-widest hidden sm:block">
@@ -552,7 +624,7 @@
   <script>
     // State management
     let currentSlide = 1;
-    const totalSlides = 5;
+    const totalSlides = 6;
 
     // Elements
     const prevBtn = document.getElementById("prev-btn");
