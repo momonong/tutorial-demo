@@ -213,7 +213,7 @@ async function callGemini(promptText) {
     throw new Error("API Key is missing. Please save your Gemini API key in Card 01 first.");
   }
   
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${currentApiKey}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemma-4-26b-a4b-it:generateContent?key=${currentApiKey}`;
   
   const response = await fetch(url, {
     method: "POST",
