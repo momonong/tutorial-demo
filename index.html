@@ -224,12 +224,12 @@
           <span id="theme-icon-moon" class="flex items-center justify-center hidden"><i data-lucide="moon" class="w-4 h-4"></i></span>
           <span id="theme-toggle-text">Dark</span>
         </button>
-        <div class="font-serif font-semibold text-xl tracking-wide" id="slide-counter">01 / 05</div>
+        <div class="font-serif font-semibold text-xl tracking-wide" id="slide-counter">01 / 06</div>
       </div>
     </header>
 
     <!-- Slide Viewport -->
-    <div class="flex-grow relative flex flex-col justify-center max-h-[58vh] md:max-h-[64vh] lg:max-h-[68vh]">
+    <div class="flex-grow relative flex flex-col justify-center overflow-hidden">
 
       <!-- Slide 1: Title Slide -->
       <div class="slide slide-transition opacity-100 transform translate-x-0 flex flex-col justify-between h-full" id="slide-1">
@@ -597,21 +597,20 @@
             </div>
           </div>
 
-        </div>
-      </div>
+    </div>
 
       <!-- Presentation Footer Controllers -->
-      <footer class="flex justify-between items-center border-t border-[#262626] pt-4 mt-4 md:mt-6 pb-2 md:pb-4">
+      <footer class="flex justify-between items-center border-t border-[#262626] pt-3 mt-3 pb-1 flex-shrink-0">
         <div class="text-xs md:text-sm font-semibold text-neutral-500 uppercase tracking-widest hidden sm:block">
           Navigate with <kbd class="px-2 py-1 bg-neutral-800 border border-neutral-700 rounded font-sans text-neutral-300">←</kbd> / <kbd class="px-2 py-1 bg-neutral-800 border border-neutral-700 rounded font-sans text-neutral-300">→</kbd> arrows
         </div>
         
         <!-- Controller Buttons -->
         <div class="flex items-center gap-6 ml-auto w-full sm:w-auto justify-between sm:justify-end">
-          <button class="btn-control px-8 py-4 text-base md:text-lg font-bold uppercase tracking-wider disabled:opacity-20 disabled:pointer-events-none" id="prev-btn" disabled>
+          <button class="btn-control px-8 py-2.5 text-base md:text-lg font-bold uppercase tracking-wider disabled:opacity-20 disabled:pointer-events-none" id="prev-btn" disabled>
             Previous
           </button>
-          <button class="btn-control px-8 py-4 text-base md:text-lg font-bold uppercase tracking-wider btn-primary" id="next-btn">
+          <button class="btn-control px-8 py-2.5 text-base md:text-lg font-bold uppercase tracking-wider btn-primary" id="next-btn">
             Next
           </button>
         </div>
